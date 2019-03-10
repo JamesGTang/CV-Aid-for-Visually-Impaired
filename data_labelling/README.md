@@ -1,5 +1,8 @@
 # labelling_street_veer
 
+Implemented code from https://github.com/roggirg/labelling_street_veer for data labelling
+Credit: Roger https://github.com/roggirg/labelling_street_veer
+
 Labelling individual images to one of 8 classes.
 
 Place all your images in a directory named "all_frames/". 
