@@ -91,17 +91,18 @@ source: https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.
 
 print("Hyperparameters for ICA filter")
 print(PARAMS)
+
 # create FastICA object
 ICA_transformer = FastICA(
-	n_components=None,
-	algorithm='parallel', 
-	whiten=True, 
-	fun='logcosh', 
-	fun_args=None, 
-	max_iter=2000, 
-	tol=0.0001, 
-	w_init=None, 
-	random_state=None)
+	n_components=PARAMS['n_components'],
+	algorithm=PARAMS['algorithm'], 
+	whiten=PARAMS['whiten'], 
+	fun=PARAMS['fun'], 
+	fun_args=PARAMS['fun_args'], 
+	max_iter=PARAMS['max_iter'], 
+	tol=PARAMS['tol'], 
+	w_init=PARAMS['w_init'], 
+	random_state=PARAMS['random_state'])
 
 # transform X
 X_transformed = ICA_transformer.fit_transform(X)
