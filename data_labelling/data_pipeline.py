@@ -91,5 +91,5 @@ class DATA_PIPELINE():
         iu.label_all(PROCESSED_FS_ROOT)
 
 dp = DATA_PIPELINE()
-dp.process_all_img()
+# dp.process_all_img()
 dp.label_all_img()
