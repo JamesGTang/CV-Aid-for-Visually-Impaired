@@ -85,7 +85,10 @@ class DATA_PIPELINE():
         print("start labelling now")
         # init image utility object
         iu = IMG_LABELLER()
+        print("labeling cam images")
         iu.label_all(PROCESSED_CAM_ROOT)
+        print("labeling fish images")
+        iu.label_all(PROCESSED_FS_ROOT)
 
 dp = DATA_PIPELINE()
 dp.process_all_img()
