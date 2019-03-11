@@ -49,7 +49,10 @@ class IMG_LABELLER():
                 line += int(2 * x)
 
             labelled = 0
-            cv2.imshow(fname, image)
+            windowName = "Centered Window"
+            cv2.namedWindow(windowName)
+            cv2.moveWindow(windowName, 200, 30)
+            cv2.imshow(windowName, image)
             while labelled == 0:
                 read_key = 0xFF & cv2.waitKey()
 
