@@ -51,7 +51,7 @@ class IMG_LABELLER():
             labelled = 0
             windowName = "Centered Window"
             cv2.namedWindow(windowName)
-            cv2.moveWindow(windowName, 200, 30)
+            cv2.moveWindow(windowName, -1000, -1000)
             cv2.imshow(windowName, image)
             while labelled == 0:
                 read_key = 0xFF & cv2.waitKey()
