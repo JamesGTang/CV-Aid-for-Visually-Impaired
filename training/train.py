@@ -8,7 +8,7 @@ def main():
     # Training Params
     batch_size = 64
     model_type = 'V1'  # V1, V2
-    data_dir = "../data_labelling/all_frames_cam/labelled_data/"
+    data_dir = "../data_labelling/training_data/"
 
     # load the right pre-trained model and set the corresponding optimizer
     if model_type == 'V1':

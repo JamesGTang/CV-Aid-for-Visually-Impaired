@@ -6,7 +6,7 @@ import keras.applications.mobilenet
 def load_data(batch_size, head_dir, preprocess=True, class_mode="categorical"):
 
     if preprocess:
-        preprocess_fn = keras.applications.mobilenetv2.preprocess_input
+        preprocess_fn = keras.applications.mobilenet_v2.preprocess_input
     else:
         preprocess_fn=None
 
@@ -19,7 +19,7 @@ def load_data(batch_size, head_dir, preprocess=True, class_mode="categorical"):
         flow_from_directory(val_path, target_size=(224, 224), batch_size=batch_size, shuffle=True, class_mode=class_mode)
 
     # new_test - steps=29 and batch_size=32, test - steps=20 and batch_size=57, unknown_test - steps=7 batch_size=28
-    test_path = head_dir+"new_test"
+    test_path = head_dir+"test"
     test_batches = ImageDataGenerator(preprocessing_function=preprocess_fn).\
         flow_from_directory(test_path, target_size=(224, 224), batch_size=batch_size, shuffle=False, class_mode=class_mode)
 
