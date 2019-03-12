@@ -1,0 +1,298 @@
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, None, None, 3)     0         
+_________________________________________________________________
+conv1_pad (ZeroPadding2D)    (None, None, None, 3)     0         
+_________________________________________________________________
+conv1 (Conv2D)               (None, None, None, 32)    864       
+_________________________________________________________________
+conv1_bn (BatchNormalization (None, None, None, 32)    128       
+_________________________________________________________________
+conv1_relu (ReLU)            (None, None, None, 32)    0         
+_________________________________________________________________
+conv_dw_1 (DepthwiseConv2D)  (None, None, None, 32)    288       
+_________________________________________________________________
+conv_dw_1_bn (BatchNormaliza (None, None, None, 32)    128       
+_________________________________________________________________
+conv_dw_1_relu (ReLU)        (None, None, None, 32)    0         
+_________________________________________________________________
+conv_pw_1 (Conv2D)           (None, None, None, 64)    2048      
+_________________________________________________________________
+conv_pw_1_bn (BatchNormaliza (None, None, None, 64)    256       
+_________________________________________________________________
+conv_pw_1_relu (ReLU)        (None, None, None, 64)    0         
+_________________________________________________________________
+conv_pad_2 (ZeroPadding2D)   (None, None, None, 64)    0         
+_________________________________________________________________
+conv_dw_2 (DepthwiseConv2D)  (None, None, None, 64)    576       
+_________________________________________________________________
+conv_dw_2_bn (BatchNormaliza (None, None, None, 64)    256       
+_________________________________________________________________
+conv_dw_2_relu (ReLU)        (None, None, None, 64)    0         
+_________________________________________________________________
+conv_pw_2 (Conv2D)           (None, None, None, 128)   8192      
+_________________________________________________________________
+conv_pw_2_bn (BatchNormaliza (None, None, None, 128)   512       
+_________________________________________________________________
+conv_pw_2_relu (ReLU)        (None, None, None, 128)   0         
+_________________________________________________________________
+conv_dw_3 (DepthwiseConv2D)  (None, None, None, 128)   1152      
+_________________________________________________________________
+conv_dw_3_bn (BatchNormaliza (None, None, None, 128)   512       
+_________________________________________________________________
+conv_dw_3_relu (ReLU)        (None, None, None, 128)   0         
+_________________________________________________________________
+conv_pw_3 (Conv2D)           (None, None, None, 128)   16384     
+_________________________________________________________________
+conv_pw_3_bn (BatchNormaliza (None, None, None, 128)   512       
+_________________________________________________________________
+conv_pw_3_relu (ReLU)        (None, None, None, 128)   0         
+_________________________________________________________________
+conv_pad_4 (ZeroPadding2D)   (None, None, None, 128)   0         
+_________________________________________________________________
+conv_dw_4 (DepthwiseConv2D)  (None, None, None, 128)   1152      
+_________________________________________________________________
+conv_dw_4_bn (BatchNormaliza (None, None, None, 128)   512       
+_________________________________________________________________
+conv_dw_4_relu (ReLU)        (None, None, None, 128)   0         
+_________________________________________________________________
+conv_pw_4 (Conv2D)           (None, None, None, 256)   32768     
+_________________________________________________________________
+conv_pw_4_bn (BatchNormaliza (None, None, None, 256)   1024      
+_________________________________________________________________
+conv_pw_4_relu (ReLU)        (None, None, None, 256)   0         
+_________________________________________________________________
+conv_dw_5 (DepthwiseConv2D)  (None, None, None, 256)   2304      
+_________________________________________________________________
+conv_dw_5_bn (BatchNormaliza (None, None, None, 256)   1024      
+_________________________________________________________________
+conv_dw_5_relu (ReLU)        (None, None, None, 256)   0         
+_________________________________________________________________
+conv_pw_5 (Conv2D)           (None, None, None, 256)   65536     
+_________________________________________________________________
+conv_pw_5_bn (BatchNormaliza (None, None, None, 256)   1024      
+_________________________________________________________________
+conv_pw_5_relu (ReLU)        (None, None, None, 256)   0         
+_________________________________________________________________
+conv_pad_6 (ZeroPadding2D)   (None, None, None, 256)   0         
+_________________________________________________________________
+conv_dw_6 (DepthwiseConv2D)  (None, None, None, 256)   2304      
+_________________________________________________________________
+conv_dw_6_bn (BatchNormaliza (None, None, None, 256)   1024      
+_________________________________________________________________
+conv_dw_6_relu (ReLU)        (None, None, None, 256)   0         
+_________________________________________________________________
+conv_pw_6 (Conv2D)           (None, None, None, 512)   131072    
+_________________________________________________________________
+conv_pw_6_bn (BatchNormaliza (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_pw_6_relu (ReLU)        (None, None, None, 512)   0         
+_________________________________________________________________
+conv_dw_7 (DepthwiseConv2D)  (None, None, None, 512)   4608      
+_________________________________________________________________
+conv_dw_7_bn (BatchNormaliza (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_dw_7_relu (ReLU)        (None, None, None, 512)   0         
+_________________________________________________________________
+conv_pw_7 (Conv2D)           (None, None, None, 512)   262144    
+_________________________________________________________________
+conv_pw_7_bn (BatchNormaliza (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_pw_7_relu (ReLU)        (None, None, None, 512)   0         
+_________________________________________________________________
+conv_dw_8 (DepthwiseConv2D)  (None, None, None, 512)   4608      
+_________________________________________________________________
+conv_dw_8_bn (BatchNormaliza (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_dw_8_relu (ReLU)        (None, None, None, 512)   0         
+_________________________________________________________________
+conv_pw_8 (Conv2D)           (None, None, None, 512)   262144    
+_________________________________________________________________
+conv_pw_8_bn (BatchNormaliza (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_pw_8_relu (ReLU)        (None, None, None, 512)   0         
+_________________________________________________________________
+conv_dw_9 (DepthwiseConv2D)  (None, None, None, 512)   4608      
+_________________________________________________________________
+conv_dw_9_bn (BatchNormaliza (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_dw_9_relu (ReLU)        (None, None, None, 512)   0         
+_________________________________________________________________
+conv_pw_9 (Conv2D)           (None, None, None, 512)   262144    
+_________________________________________________________________
+conv_pw_9_bn (BatchNormaliza (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_pw_9_relu (ReLU)        (None, None, None, 512)   0         
+_________________________________________________________________
+conv_dw_10 (DepthwiseConv2D) (None, None, None, 512)   4608      
+_________________________________________________________________
+conv_dw_10_bn (BatchNormaliz (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_dw_10_relu (ReLU)       (None, None, None, 512)   0         
+_________________________________________________________________
+conv_pw_10 (Conv2D)          (None, None, None, 512)   262144    
+_________________________________________________________________
+conv_pw_10_bn (BatchNormaliz (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_pw_10_relu (ReLU)       (None, None, None, 512)   0         
+_________________________________________________________________
+conv_dw_11 (DepthwiseConv2D) (None, None, None, 512)   4608      
+_________________________________________________________________
+conv_dw_11_bn (BatchNormaliz (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_dw_11_relu (ReLU)       (None, None, None, 512)   0         
+_________________________________________________________________
+conv_pw_11 (Conv2D)          (None, None, None, 512)   262144    
+_________________________________________________________________
+conv_pw_11_bn (BatchNormaliz (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_pw_11_relu (ReLU)       (None, None, None, 512)   0         
+_________________________________________________________________
+conv_pad_12 (ZeroPadding2D)  (None, None, None, 512)   0         
+_________________________________________________________________
+conv_dw_12 (DepthwiseConv2D) (None, None, None, 512)   4608      
+_________________________________________________________________
+conv_dw_12_bn (BatchNormaliz (None, None, None, 512)   2048      
+_________________________________________________________________
+conv_dw_12_relu (ReLU)       (None, None, None, 512)   0         
+_________________________________________________________________
+conv_pw_12 (Conv2D)          (None, None, None, 1024)  524288    
+_________________________________________________________________
+conv_pw_12_bn (BatchNormaliz (None, None, None, 1024)  4096      
+_________________________________________________________________
+conv_pw_12_relu (ReLU)       (None, None, None, 1024)  0         
+_________________________________________________________________
+conv_dw_13 (DepthwiseConv2D) (None, None, None, 1024)  9216      
+_________________________________________________________________
+conv_dw_13_bn (BatchNormaliz (None, None, None, 1024)  4096      
+_________________________________________________________________
+conv_dw_13_relu (ReLU)       (None, None, None, 1024)  0         
+_________________________________________________________________
+conv_pw_13 (Conv2D)          (None, None, None, 1024)  1048576   
+_________________________________________________________________
+conv_pw_13_bn (BatchNormaliz (None, None, None, 1024)  4096      
+_________________________________________________________________
+conv_pw_13_relu (ReLU)       (None, None, None, 1024)  0         
+_________________________________________________________________
+conv10 (Conv2D)              (None, None, None, 64)    589888    
+_________________________________________________________________
+relu_conv10 (Activation)     (None, None, None, 64)    0         
+_________________________________________________________________
+global_average_pooling2d_1 ( (None, 64)                0         
+_________________________________________________________________
+dropout (Dropout)            (None, 64)                0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 65        
+_________________________________________________________________
+re_lu_1 (ReLU)               (None, 1)                 0         
+=================================================================
+Total params: 3,818,817
+Trainable params: 3,796,929
+Non-trainable params: 21,888
+_________________________________________________________________
+None
+Found 1808 images belonging to 8 classes.
+Found 624 images belonging to 8 classes.
+Found 611 images belonging to 8 classes.
+10
+Epoch 1/50
+ - 13s - loss: 2.1300 - mean_absolute_error: 2.1300 - val_loss: 1.2587 - val_mean_absolute_error: 1.2587
+Epoch 2/50
+ - 7s - loss: 1.5366 - mean_absolute_error: 1.5366 - val_loss: 1.2375 - val_mean_absolute_error: 1.2375
+Epoch 3/50
+ - 7s - loss: 1.1798 - mean_absolute_error: 1.1798 - val_loss: 1.0133 - val_mean_absolute_error: 1.0133
+Epoch 4/50
+ - 7s - loss: 1.0613 - mean_absolute_error: 1.0613 - val_loss: 1.1817 - val_mean_absolute_error: 1.1817
+Epoch 5/50
+ - 7s - loss: 0.9989 - mean_absolute_error: 0.9989 - val_loss: 0.8036 - val_mean_absolute_error: 0.8036
+Epoch 6/50
+ - 7s - loss: 0.9009 - mean_absolute_error: 0.9009 - val_loss: 0.6082 - val_mean_absolute_error: 0.6082
+Epoch 7/50
+ - 7s - loss: 0.8631 - mean_absolute_error: 0.8631 - val_loss: 0.7587 - val_mean_absolute_error: 0.7587
+Epoch 8/50
+ - 7s - loss: 0.8141 - mean_absolute_error: 0.8141 - val_loss: 0.6045 - val_mean_absolute_error: 0.6045
+Epoch 9/50
+ - 7s - loss: 0.7790 - mean_absolute_error: 0.7790 - val_loss: 0.8840 - val_mean_absolute_error: 0.8840
+Epoch 10/50
+ - 7s - loss: 0.7998 - mean_absolute_error: 0.7998 - val_loss: 0.6794 - val_mean_absolute_error: 0.6794
+Epoch 11/50
+ - 7s - loss: 0.7766 - mean_absolute_error: 0.7766 - val_loss: 0.5072 - val_mean_absolute_error: 0.5072
+Epoch 12/50
+ - 7s - loss: 0.7371 - mean_absolute_error: 0.7371 - val_loss: 0.6497 - val_mean_absolute_error: 0.6497
+Epoch 13/50
+ - 7s - loss: 0.7353 - mean_absolute_error: 0.7353 - val_loss: 0.7062 - val_mean_absolute_error: 0.7062
+Epoch 14/50
+ - 7s - loss: 0.7284 - mean_absolute_error: 0.7284 - val_loss: 0.4620 - val_mean_absolute_error: 0.4620
+Epoch 15/50
+ - 7s - loss: 0.6973 - mean_absolute_error: 0.6973 - val_loss: 0.3904 - val_mean_absolute_error: 0.3904
+Epoch 16/50
+ - 7s - loss: 0.6401 - mean_absolute_error: 0.6401 - val_loss: 0.3989 - val_mean_absolute_error: 0.3989
+Epoch 17/50
+ - 7s - loss: 0.6566 - mean_absolute_error: 0.6566 - val_loss: 0.4087 - val_mean_absolute_error: 0.4087
+Epoch 18/50
+ - 7s - loss: 0.6328 - mean_absolute_error: 0.6328 - val_loss: 0.3415 - val_mean_absolute_error: 0.3415
+Epoch 19/50
+ - 7s - loss: 0.6124 - mean_absolute_error: 0.6124 - val_loss: 0.4141 - val_mean_absolute_error: 0.4141
+Epoch 20/50
+ - 7s - loss: 0.6418 - mean_absolute_error: 0.6418 - val_loss: 0.5825 - val_mean_absolute_error: 0.5825
+Epoch 21/50
+ - 7s - loss: 0.6456 - mean_absolute_error: 0.6456 - val_loss: 0.6767 - val_mean_absolute_error: 0.6767
+Epoch 22/50
+ - 7s - loss: 0.6100 - mean_absolute_error: 0.6100 - val_loss: 0.3903 - val_mean_absolute_error: 0.3903
+Epoch 23/50
+ - 7s - loss: 0.6322 - mean_absolute_error: 0.6322 - val_loss: 0.3575 - val_mean_absolute_error: 0.3575
+Epoch 24/50
+ - 7s - loss: 0.5496 - mean_absolute_error: 0.5496 - val_loss: 0.3204 - val_mean_absolute_error: 0.3204
+Epoch 25/50
+ - 7s - loss: 0.5704 - mean_absolute_error: 0.5704 - val_loss: 0.2984 - val_mean_absolute_error: 0.2984
+Epoch 26/50
+ - 7s - loss: 0.5656 - mean_absolute_error: 0.5656 - val_loss: 0.3823 - val_mean_absolute_error: 0.3823
+Epoch 27/50
+ - 7s - loss: 0.5557 - mean_absolute_error: 0.5557 - val_loss: 0.3611 - val_mean_absolute_error: 0.3611
+Epoch 28/50
+ - 7s - loss: 0.5430 - mean_absolute_error: 0.5430 - val_loss: 0.2988 - val_mean_absolute_error: 0.2988
+Epoch 29/50
+ - 7s - loss: 0.5458 - mean_absolute_error: 0.5458 - val_loss: 0.4925 - val_mean_absolute_error: 0.4925
+Epoch 30/50
+ - 7s - loss: 0.5185 - mean_absolute_error: 0.5185 - val_loss: 0.2908 - val_mean_absolute_error: 0.2908
+Epoch 31/50
+ - 7s - loss: 0.5385 - mean_absolute_error: 0.5385 - val_loss: 0.3127 - val_mean_absolute_error: 0.3127
+Epoch 32/50
+ - 7s - loss: 0.5197 - mean_absolute_error: 0.5197 - val_loss: 0.3410 - val_mean_absolute_error: 0.3410
+Epoch 33/50
+ - 7s - loss: 0.5024 - mean_absolute_error: 0.5024 - val_loss: 0.2968 - val_mean_absolute_error: 0.2968
+Epoch 34/50
+ - 7s - loss: 0.4866 - mean_absolute_error: 0.4866 - val_loss: 0.2995 - val_mean_absolute_error: 0.2995
+Epoch 35/50
+ - 7s - loss: 0.4827 - mean_absolute_error: 0.4827 - val_loss: 0.2780 - val_mean_absolute_error: 0.2780
+Epoch 36/50
+ - 7s - loss: 0.5047 - mean_absolute_error: 0.5047 - val_loss: 0.2629 - val_mean_absolute_error: 0.2629
+Epoch 37/50
+ - 7s - loss: 0.5114 - mean_absolute_error: 0.5114 - val_loss: 0.3114 - val_mean_absolute_error: 0.3114
+Epoch 38/50
+ - 7s - loss: 0.4794 - mean_absolute_error: 0.4794 - val_loss: 0.2727 - val_mean_absolute_error: 0.2727
+Epoch 39/50
+ - 7s - loss: 0.4870 - mean_absolute_error: 0.4870 - val_loss: 0.3064 - val_mean_absolute_error: 0.3064
+Epoch 40/50
+ - 7s - loss: 0.5082 - mean_absolute_error: 0.5082 - val_loss: 0.2859 - val_mean_absolute_error: 0.2859
+Epoch 41/50
+ - 7s - loss: 0.4795 - mean_absolute_error: 0.4795 - val_loss: 0.3206 - val_mean_absolute_error: 0.3206
+Epoch 42/50
+ - 7s - loss: 0.4878 - mean_absolute_error: 0.4878 - val_loss: 0.2814 - val_mean_absolute_error: 0.2814
+Epoch 43/50
+ - 7s - loss: 0.4739 - mean_absolute_error: 0.4739 - val_loss: 0.2669 - val_mean_absolute_error: 0.2669
+Epoch 44/50
+ - 7s - loss: 0.4762 - mean_absolute_error: 0.4762 - val_loss: 0.2283 - val_mean_absolute_error: 0.2283
+Epoch 45/50
+ - 7s - loss: 0.4781 - mean_absolute_error: 0.4781 - val_loss: 0.2784 - val_mean_absolute_error: 0.2784
+Epoch 46/50
+ - 7s - loss: 0.4716 - mean_absolute_error: 0.4716 - val_loss: 0.2782 - val_mean_absolute_error: 0.2782
+Epoch 47/50
+ - 7s - loss: 0.4672 - mean_absolute_error: 0.4672 - val_loss: 0.2484 - val_mean_absolute_error: 0.2484
+Epoch 48/50
+ - 7s - loss: 0.4676 - mean_absolute_error: 0.4676 - val_loss: 0.2203 - val_mean_absolute_error: 0.2203
+Epoch 49/50
+ - 7s - loss: 0.4559 - mean_absolute_error: 0.4559 - val_loss: 0.3048 - val_mean_absolute_error: 0.3048
+Epoch 50/50
+ - 7s - loss: 0.4712 - mean_absolute_error: 0.4712 - val_loss: 0.2332 - val_mean_absolute_error: 0.2332
