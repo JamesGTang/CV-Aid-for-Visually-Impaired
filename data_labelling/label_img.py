@@ -49,10 +49,15 @@ class IMG_LABELLER():
                 line += int(2 * x)
 
             labelled = 0
+
+            #Positioning frame properly on screen
             windowName = "Centered Window"
             cv2.namedWindow(windowName)
-            cv2.moveWindow(windowName, -1000, -1000)
+            #Change the x,y coordinate to center the frame on your screen
+            #Size that works best for Adeeb's display - (monitor: -1000, -1000. Laptop screen: 200, 30)
+            cv2.moveWindow(windowName, 200, 30)
             cv2.imshow(windowName, image)
+
             while labelled == 0:
                 read_key = 0xFF & cv2.waitKey()
 
