@@ -4,11 +4,11 @@ import glob
 import re
 import os
 
-# LABELLED_CAM_DIR = "./all_frames_cam/labelled_data/"
-# SPLIT_CAM_DIR = "./training_data_cam/"
+# LABELLED_DIR = "./all_frames_cam/labelled_data/"
+# SPLIT__DIR = "./training_data_cam/"
 
-LABELLED_ORBIT_DIR = "../orbi_processed/labelled_data/"
-SPLIT_ORBIT_DIR = "../training_data_orbi/"
+LABELLED_DIR = "../orbi_processed/labelled_data/"
+SPLIT_DIR = "./training_data_orbi/"
 
 NUM_ACTIONS = 8
 
