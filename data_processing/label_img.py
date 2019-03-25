@@ -42,11 +42,24 @@ class IMG_LABELLER():
             orig_img = cv2.resize(image.copy(), (224, 224))
 
             # Put vertical lines and text
-            x = image.shape[1]//12
-            line = x
-            for _ in range(7):
-                cv2.line(image, (line, 0), (line, image.shape[0]), (0, 0, 0), 2)
-                line += int(2 * x)
+            font                   = cv2.FONT_HERSHEY_SIMPLEX
+            bottomLeftCornerOfText = (10,500)
+            fontScale              = 1
+            fontColor              = (0,0,255)
+            lineType               = 2
+
+            x = image.shape[1]//8
+            line = 0
+            for i in range(10):
+                cv2.line(image, (line, 0), (line, image.shape[0]), (0,0,255), 2)
+                cv2.putText(image, 
+                    str(i),
+                    (line,30), 
+                    font, 
+                    fontScale,
+                    fontColor,
+                    lineType)
+                line += int(x)
 
             labelled = 0
 
