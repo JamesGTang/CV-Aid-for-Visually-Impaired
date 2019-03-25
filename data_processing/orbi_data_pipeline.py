@@ -6,7 +6,7 @@ import cv2
 import imutils
 from label_orbi_img import IMG_LABELLER
 
-ORBI_DATA_ROOT = '../orbi_sample'
+ORBI_DATA_ROOT = '../orbi_original/'
 PROCESSED_ORBI_ROOT = '../orbi_processed/'
 
 ADJ_SIZE = (426,240)
@@ -136,13 +136,6 @@ class DATA_PIPELINE():
             if matches != []:
                 fp = os.path.join(root, filename)
                 print("Processing directory: "+root+" | destination directory: "+PROCESSED_ORBI_ROOT)
-                # # remove cam directory and recreate
-                # if not os.path.exists(dest_dir):
-                #     os.makedirs(dest_dir)
-                # else:  
-                #     print(dest_dir+' exists, will be removed')
-                #     shutil.rmtree(dest_dir, ignore_errors=True)
-                #     os.makedirs(dest_dir)
 
             # if length of files in each folder are less than 4 then the folder doesnt have footage of all angles
             if len(all_files_in_dir) < 4:
@@ -172,7 +165,7 @@ class DATA_PIPELINE():
 
                     # Check if this is the frame closest to 1 seconds
                     if success_left==True:
-                        if framecount == (fps * 1) and success_right==True and success_leftEye==True and success_rightEye==True:
+                        if framecount == (fps * 0.3) and success_right==True and success_leftEye==True and success_rightEye==True:
                             #resize all images
                             leftIMG = cv2.resize(leftIMG,ADJ_SIZE)
                             leftEyeIMG = cv2.resize(leftEyeIMG,ADJ_SIZE)
@@ -207,7 +200,7 @@ class DATA_PIPELINE():
                         break
                 folder_idx += 1
         cv2.destroyAllWindows()        
-        print("Finished proprocessing images")
+        print("Finished proprocessing images, total images: ",file_idx)
 
     def label_all_img(self):
         print("start labelling now")
