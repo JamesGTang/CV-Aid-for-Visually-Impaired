@@ -4,8 +4,12 @@ import glob
 import re
 import os
 
-LABELLED_DIR = "./all_frames_cam/labelled_data/"
-SPLIT_DIR = "./training_data/"
+LABELLED_CAM_DIR = "./all_frames_cam/labelled_data/"
+SPLIT_CAM_DIR = "./training_data_cam/"
+
+LABELLED_ORBIT_DIR = "./all_frames_cam/labelled_data/"
+SPLIT_ORBIT_DIR = "./training_data_cam/"
+
 NUM_ACTIONS = 8
 
 if not os.path.isdir(SPLIT_DIR):

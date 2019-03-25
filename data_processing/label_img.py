@@ -41,7 +41,7 @@ class IMG_LABELLER():
             # make a copy to not save lines
             orig_img = cv2.resize(image.copy(), (224, 224))
 
-            # Put vertical lines
+            # Put vertical lines and text
             x = image.shape[1]//12
             line = x
             for _ in range(7):
