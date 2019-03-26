@@ -11,7 +11,7 @@ import time
 import os
 import pickle
 
-RUN_ID = 2
+RUN_ID = 0
 start_time = 0
 end_time = 0
 
@@ -20,7 +20,8 @@ def main():
     batch_size = 64
     model_type = 'V1'  # V1, V2
     data_dir = "../data_processing/training_data/"
-    MODEL_NAME = "CV_aid_mobilenet_transfer_learning"
+    data_dir = "../data_processing/training_data_orbi/"
+    MODEL_NAME = "CV_aid_mobilenet_with_orbi_dataset"
 
     # # load the right pre-trained model and set the corresponding optimizer
     # if model_type == 'V1':
@@ -127,20 +128,20 @@ def main():
     plt.figure(figsize=[16,9])
     plt.plot(history.history['loss'],'r',linewidth=2.0)
     plt.plot(history.history['val_loss'],'b',linewidth=2.0)
-    plt.legend(['Training loss', 'Validation Loss'],fontsize=20)
+    plt.legend(['Training loss', 'Validation Loss'],fontsize=16)
     plt.xlabel('Epochs ',fontsize=14)
     plt.ylabel('Loss',fontsize=14)
-    plt.title('Loss Curves for Model'+MODEL_NAME+" Run ID: "+str(RUN_ID),fontsize=14)
+    plt.title('Loss Curves for Model'+MODEL_NAME+" Run ID: "+str(RUN_ID),fontsize=20)
     plt.savefig('./graph/RUN_'+str(RUN_ID)+'_loss_curve.png')
      
     # Accuracy Curves
     plt.figure(figsize=[16,9])
     plt.plot(history.history['acc'],'r',linewidth=2.0)
     plt.plot(history.history['val_acc'],'b',linewidth=2.0)
-    plt.legend(['Training Accuracy', 'Validation Accuracy'],fontsize=20)
+    plt.legend(['Training Accuracy', 'Validation Accuracy'],fontsize=16)
     plt.xlabel('Epochs ',fontsize=14)
     plt.ylabel('Accuracy',fontsize=14)
-    plt.title('Accuracy Curves for Model '+MODEL_NAME+" Run ID: "+str(RUN_ID),fontsize=14)
+    plt.title('Accuracy Curves for Model '+MODEL_NAME+" Run ID: "+str(RUN_ID),fontsize=20)
     plt.savefig('./graph/RUN_'+str(RUN_ID)+'_acc_curve.png')
 
 if __name__ == '__main__':
