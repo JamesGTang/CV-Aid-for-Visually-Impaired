@@ -6,10 +6,12 @@ from utils.load_data import load_data
 from keras.callbacks import ModelCheckpoint
 from keras.utils import plot_model
 from matplotlib import pyplot as plt
-
+from utils import orbi_model
 import time
+import os
+import pickle
 
-RUN_ID = 1
+RUN_ID = 2
 start_time = 0
 end_time = 0
 
@@ -39,7 +41,7 @@ def main():
         init_optimizer = Adam(lr=0.00025)
         model.compile(
             init_optimizer, 
-            loss='categorical_crossentropy', 
+            loss='mean_squared_error',
             metrics=['accuracy']
         )
         preprocess = True
@@ -49,7 +51,7 @@ def main():
         init_optimizer = SGD(lr=0.005)
         model.compile(
             init_optimizer, 
-            loss='categorical_crossentropy', 
+            loss='mean_squared_error',
             metrics=['accuracy']
         )
         preprocess = True
@@ -63,8 +65,8 @@ def main():
     # checkpoint
     if not os.path.isdir('./model'):
         os.mkdir('./model')
-    filepath="./model/model-"+str(RUN_ID)+"{epoch:02d}-{val_acc:.2f}.hdf5"
-    mode_checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+    filepath="./model/"+MODEL_NAME+"-"+str(RUN_ID)+"-{epoch:02d}-{val_acc:.2f}.hdf5"
+    model_checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
 
     # Get my data loaders
     train_batches, val_batches, test_batches = load_data(
@@ -78,9 +80,9 @@ def main():
     print("Start timing module:")
     start_time = time.time()
     print("Program starts at time: ",start_time)
-    print("Size of training data: ",len(train_batches))
-    print("Size of validation data: ",len(val_batches))
-    print("Size of test data: ",len(test_batches))
+    print("Batch size of training data: ",len(train_batches))
+    print("Batch size of validation data: ",len(val_batches))
+    print("Batch size of test data: ",len(test_batches))
 
     # Initial training of final layer
     history = model.fit_generator(
@@ -89,7 +91,7 @@ def main():
         validation_data=val_batches,
         validation_steps=val_batches.n//batch_size, 
         epochs=50, 
-        callbacks=model_checkpoint,
+        callbacks=[model_checkpoint],
         verbose=1,
     )
 
@@ -104,9 +106,9 @@ def main():
     print("Saving history to file")
     if not os.path.isdir('./graph'):
         os.mkdir('./graph')
-    with open('./graph/history_r'+str(RUN_ID)+'.log','w+') as f:
-        f.write(history)
-
+    with open('./graph/history_RUN_'+str(RUN_ID)+'.pkl','wb') as f:
+        pickle.dump(history.history,f)
+    print(str(history.history))
     # # for ft_layer_depth in ft_layers:
     # #     model = models.fine_tune(model, ft_layer_depth)
     # #     model.compile(SGD(lr=0.01), loss='mean_squared_error', metrics=['mae'])
@@ -121,6 +123,25 @@ def main():
     # model.save_weights("saved_ckpt/mobilenet"+model_type+".h5")
     # save_model_pb.save_pb(model_type)
 
+    # plot
+    plt.figure(figsize=[16,9])
+    plt.plot(history.history['loss'],'r',linewidth=2.0)
+    plt.plot(history.history['val_loss'],'b',linewidth=2.0)
+    plt.legend(['Training loss', 'Validation Loss'],fontsize=20)
+    plt.xlabel('Epochs ',fontsize=14)
+    plt.ylabel('Loss',fontsize=14)
+    plt.title('Loss Curves for Model'+MODEL_NAME+" Run ID: "+str(RUN_ID),fontsize=14)
+    plt.savefig('./graph/RUN_'+str(RUN_ID)+'_loss_curve.png')
+     
+    # Accuracy Curves
+    plt.figure(figsize=[16,9])
+    plt.plot(history.history['acc'],'r',linewidth=2.0)
+    plt.plot(history.history['val_acc'],'b',linewidth=2.0)
+    plt.legend(['Training Accuracy', 'Validation Accuracy'],fontsize=20)
+    plt.xlabel('Epochs ',fontsize=14)
+    plt.ylabel('Accuracy',fontsize=14)
+    plt.title('Accuracy Curves for Model '+MODEL_NAME+" Run ID: "+str(RUN_ID),fontsize=14)
+    plt.savefig('./graph/RUN_'+str(RUN_ID)+'_acc_curve.png')
 
 if __name__ == '__main__':
     main()

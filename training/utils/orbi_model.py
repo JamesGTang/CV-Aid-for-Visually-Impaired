@@ -8,12 +8,9 @@ import keras.backend as K
 
 def mobilenetv1_transfer_learning(num_classes):
     ft_layers = [15, 22]
-    mobilenet = keras.applications.mobilenet.MobileNet(
-        include_top=False,
-        input_shape=(960,426,3)
-    )
+    mobilenet = keras.applications.mobilenet.MobileNet(include_top=False)
     x = mobilenet.layers[-1].output  # -3
-    x = Convolution2D(64, (4, 4), padding='valid', name='conv10')(x)
+    x = Convolution2D(64, (3, 3), padding='valid', name='conv10')(x)
     x = Activation('relu', name='relu_conv10')(x)
     x = GlobalAveragePooling2D()(x)
     x = Dropout(0.5, name='dropout')(x)
@@ -29,10 +26,7 @@ def mobilenetv1_transfer_learning(num_classes):
 
 def mobilenetv2_transfer_learning(num_classes):
     ft_layers = [2] # , 14, 22]
-    mobilenet = keras.applications.mobilenet.MobileNetV2(
-        include_top=False,
-        input_shape=(960,426,3)
-    )
+    mobilenet = keras.applications.mobilenetv2.MobileNetV2()
     x = mobilenet.layers[-3].output  # -14
 
     x = Convolution2D(64, (3, 3), padding='valid', name='conv10')(x)
