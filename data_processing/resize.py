@@ -25,7 +25,12 @@ def convert_to_square(img):
 print(img_list)
 for filename in img_list:
     origin_img = cv2.imread(filename)
-    square = cv2.resize(convert_to_square(origin_img),(224,224))
-    # cv2.imshow("black square", square)
-    # cv2.waitKey(0)
-    cv2.imwrite(filename,square)
+    # print(filename)
+    square = convert_to_square(origin_img)
+    if square is None:
+        print("File: "+filename+" is corrupted, skipped")
+    else:
+        square = cv2.resize(square,(224,224))
+        # cv2.imshow("black square", square)
+        # cv2.waitKey(0)
+        cv2.imwrite(filename,square)
