@@ -16,9 +16,35 @@ There will be an industrial partner who will lending the 360° camera hardware. 
 ### Project Supervisors:
 Jeremy Cooperstock, Centre for Intelligent Machines 
 McGill University
-jer at cim.mcgill.ca 
+jer at cim.mcgill.ca
 
-http://www.cim.mcgill.ca/
+http://www.cim.mcgill.ca/ 
+
+### Dataset ()
+
+The original dataset is published for non-commercial purpose, you can use this dataset for research and you must credit, Shared Reality Lab at McGill Center for Intelligent Machines (CIM), http://srl.mcgill.ca/ in your publication. Data colllection credit by 
+Adeeb Ibne Amjad, Stefano Commodari, Hakim Amarouche and James Tang. 
+
+Uncompressed video footage of intersection crossing, each intersection contained in one folder, the video files named PRIM0001.mp4,PRIM0002.mp4,PRIM0003.mp4,PRIM0004.mp4 in each folder is the same crossing captured from the four lens installed the glass.
+
+https://drive.google.com/open?id=1nWGju1AHbJoYvNZnnofRb8Y7jbVBeBCE
+
+| File type | Description | 
+|--|--|
+| .THM  | Video file thumbnail   |
+| .MP4 | Original video file of intersection crossing captured at 30FPS |
+| .BIN | Lens configuration binary file| 
+| .CFG | Property file containing the configuration properties of the lens |
+
+Video foortages compressed into zip files. 
+
+| File link | Size | 
+|--|--|
+| https://drive.google.com/open?id=13gjGYKL2uD86O0bYRAj2wlqGXIJE0QW1 | ~ 3.51 GB   |
+| https://drive.google.com/open?id=1_eBZ_63d-734eNjh8_7jbAOSO8nCIsd0 | ~ 3.27 GB |
+| https://drive.google.com/open?id=14bGY0XIOrh-dWGjtVB6tfMvVB-R6gyhJ | ~ 2.73 GB| 
+| https://drive.google.com/open?id=1JXUz4884y5gNmPkgKoIWyBGHVJGg8kf3 | ~ 3.51 GB |
+
 
 ### Credit 
 | Name | Email | 
