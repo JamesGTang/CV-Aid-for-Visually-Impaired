@@ -51,7 +51,7 @@ Uncompressed video footage of intersection crossing, each intersection contained
 | .BIN | Lens configuration binary file| 
 | .CFG | Property file containing the configuration properties of the lens |
 
-Video foortages compressed into zip files. 
+Video footages compressed into zip files. 
 
 | File link | Size | 
 |--|--|
