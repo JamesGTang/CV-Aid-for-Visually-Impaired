@@ -4,8 +4,15 @@ import glob
 import re
 import os
 
-# LABELLED_DIR = "./all_frames_cam/labelled_data/"
-# SPLIT__DIR = "./training_data_cam/"
+"""
+Script written for CV-Aid Design project at McGill
+@author jamestang
+@version 1.1
+
+This script splits the dataset into traning, validation and testing sets
+
+"""
+
 
 LABELLED_DIR = "../orbi_processed/labelled_data/"
 SPLIT_DIR = "./training_data_orbi/"

@@ -13,7 +13,13 @@ actions = {
     '6': 54,
     '7': 55,
 }
+"""
+Script modified for CV-Aid Design project at McGill,
+original author Roger: https://github.com/roggirg/labelling_street_veer,
 
+This script allows user to label the data interactively by using keyboard.
+
+"""
 class IMG_LABELLER():
     def label_all(self,root_path):
         DIR_UNLABELLED = root_path
@@ -36,11 +42,12 @@ class IMG_LABELLER():
             if img_idx % 100 == 0:
                 print("Number of completed images: ", str(init_idx+img_idx+1))
             image = cv2.imread(fname)
-            image = cv2.resize(image, (684, 684))
+            # image = cv2.resize(image, (684, 684))
 
             # make a copy to not save lines
-            orig_img = cv2.resize(image.copy(), (224, 224))
-
+            # orig_img = cv2.resize(image.copy(), (224, 224))
+            orig_img = image.copy()
+            
             # Put vertical lines and text
             font                   = cv2.FONT_HERSHEY_SIMPLEX
             bottomLeftCornerOfText = (10,500)

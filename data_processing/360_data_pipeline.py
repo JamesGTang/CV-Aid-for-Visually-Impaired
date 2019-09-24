@@ -6,10 +6,22 @@ import cv2
 import imutils
 from label_orbi_img import IMG_LABELLER
 
+"""
+Script written for CV-Aid Design project at McGill
+@author jamestang
+@version 1.1
+This script preprocess the images obtained from 360 glass, and apply synchronize stiching
+Modifies only the parameter ORBI_DATA_ROOT for orginal dataset.
+and PROCESSED_ORBI_ROOT for where to store the processed images. 
+
+"""
+
+# modify these two parameters according to folder structure
 ORBI_DATA_ROOT = '../orbi_original/'
 PROCESSED_ORBI_ROOT = '../orbi_processed/'
-
+# modify this file to specify the size of the final image
 ADJ_SIZE = (426,240)
+
 
 class DATA_PIPELINE():
     def __init__(self):
