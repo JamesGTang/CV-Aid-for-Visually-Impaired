@@ -1,10 +1,18 @@
-Fored from https://github.com/amir-abdi/keras_to_tensorflow
-Credit: amir-abdi https://github.com/amir-abdi
+# Model conversion
 
-## Command
-python keras_to_tensorflow.py --input_model="CV_aid_mobilenet_transfer_learning-236-0.88.hdf5" --output_model="CV_aid_mobilenet_transfer_learning-236-0.88.pb"
+## Credit
+Forked from https://github.com/amir-abdi/keras_to_tensorflow
+Author: amir-abdi https://github.com/amir-abdi
+With modification
 
-# Keras to TensorFlow
+## Usage
+Converts Keras model into a Tensorflow model
+
+## Sample command
+
+    python3 keras_to_tensorflow.py --input_model="CV_aid_mobilenet_transfer_learning-236-0.88.hdf5" --output_model="CV_aid_mobilenet_transfer_learning-236-0.88.pb"
+
+## Keras to TensorFlow
 The `keras_to_tensorflow.py` is a tool that converts a trained keras model into a ready-for-inference TensorFlow model.
 
 #### Summary

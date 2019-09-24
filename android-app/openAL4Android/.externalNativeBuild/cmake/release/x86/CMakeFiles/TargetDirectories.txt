@@ -1,0 +1,2 @@
+/Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/openAL4Android/.externalNativeBuild/cmake/release/x86/CMakeFiles/rebuild_cache.dir
+/Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/openAL4Android/.externalNativeBuild/cmake/release/x86/CMakeFiles/edit_cache.dir
