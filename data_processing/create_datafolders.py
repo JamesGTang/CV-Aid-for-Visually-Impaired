@@ -16,7 +16,7 @@ This script splits the dataset into traning, validation and testing sets
 
 LABELLED_DIR = "../orbi_processed/labelled_data/"
 SPLIT_DIR = "./training_data_orbi/"
-
+Train_Valid_Test_Split = [0.8, 0.1, 0.1]
 NUM_ACTIONS = 8
 
 if not os.path.isdir(SPLIT_DIR):
@@ -36,7 +36,7 @@ for i in range(NUM_ACTIONS):
     # print(all_fnames_in_folder)
     if len(all_fnames_in_folder) == 0:
         continue
-    random_choices = np.random.choice(3, len(all_fnames_in_folder), p=[0.8, 0.1, 0.1])
+    random_choices = np.random.choice(3, len(all_fnames_in_folder), p= Train_Valid_Test_Split)
     for j, fname in enumerate(all_fnames_in_folder):
         new_fname = re.sub(LABELLED_DIR, SPLIT_DIR+folder_types[random_choices[j]], fname)
         print(fname+" "+new_fname)
