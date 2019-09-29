@@ -1,5 +1,5 @@
 from keras.optimizers import Adam, SGD, RMSprop
-from utils import models, prediction_utils, save_model_pb
+# from utils import models, prediction_utils, save_model_pb
 from sklearn.metrics import confusion_matrix, accuracy_score, mean_absolute_error
 from utils.load_data import load_data
 
@@ -11,18 +11,41 @@ import time
 import os
 import pickle
 
-RUN_ID = 0
+"""
+#
+# parameter to identify each training
+# RUN_ID: run ID that identify each training
+# MODEL_NAME: the name of the model
+# data_dir: where to get training data
+# 
+"""
+RUN_ID = 0 
+# MODEL_NAME = "CV_aid_mobilenet_with_360_dataset"
+# data_dir = "../data_processing/training_data_360/"
+
+MODEL_NAME = "CV_aid_mobilenet_with_cam_dataset"
+data_dir = "../data_processing/training_data_cam/"
+
+model_type = 'V1'  # V1, V2
+
+"""
+# hyperparameter related to training
+# batch_size, batch size to feed into traning
+# lr: learning rate for ADAM optimizer
+
+"""
+batch_size = 64
+learning_rate = 0.00025
+epoch = 50
+
+# general variable to hold training information
 start_time = 0
 end_time = 0
+
 
 def main():
     # Training Params
     batch_size = 64
-    model_type = 'V1'  # V1, V2
-    data_dir = "../data_processing/training_data/"
-    data_dir = "../data_processing/training_data_orbi/"
-    MODEL_NAME = "CV_aid_mobilenet_with_orbi_dataset"
-
     # # load the right pre-trained model and set the corresponding optimizer
     # if model_type == 'V1':
     #     model, ft_layers = models.mobilenetv1_transfer_learning(num_classes=8)
@@ -39,7 +62,7 @@ def main():
     if model_type == 'V1':
         # model, ft_layers = models.mobilenetv1_transfer_learning(num_classes=8)
         model, ft_layers = orbi_model.mobilenetv1_transfer_learning(num_classes=8)
-        init_optimizer = Adam(lr=0.00025)
+        init_optimizer = Adam(lr=learning_rate)
         model.compile(
             init_optimizer, 
             loss='mean_squared_error',
@@ -49,7 +72,7 @@ def main():
     elif model_type == 'V2':
         # model, ft_layers = models.mobilenetv2_transfer_learning(num_classes=8)
         model, ft_layers = orbi_model.mobilenetv2_transfer_learning(num_classes=8)
-        init_optimizer = SGD(lr=0.005)
+        init_optimizer = SGD(lr=learning_rate)
         model.compile(
             init_optimizer, 
             loss='mean_squared_error',
@@ -58,16 +81,23 @@ def main():
         preprocess = True
     
     # save model
-    print("Saving model visual to file")
+    print("Saving model visual to file: "+'./graph/'+MODEL_NAME+"="+"RUN_ID"+'.png')
     if not os.path.isdir('./graph'):
         os.mkdir('./graph')
-    plot_model(model, to_file='./graph/'+MODEL_NAME+'.png')
+    plot_model(model, to_file='./graph/'+MODEL_NAME+"="+"RUN_ID"+'.png')
     
     # checkpoint
     if not os.path.isdir('./model'):
         os.mkdir('./model')
-    filepath="./model/"+MODEL_NAME+"-"+str(RUN_ID)+"-{epoch:02d}-{val_acc:.2f}.hdf5"
-    model_checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+    filepath="./model/"+MODEL_NAME+"-"+str(RUN_ID)+str(model_type)+"-{epoch:02d}-{val_acc:.2f}.hdf5"
+    model_checkpoint = ModelCheckpoint(
+        filepath, 
+        monitor='val_acc', 
+        verbose=1, 
+        save_weights_only=True,
+        save_best_only=True, 
+        mode='max'
+    )
 
     # Get my data loaders
     train_batches, val_batches, test_batches = load_data(
@@ -77,13 +107,23 @@ def main():
         class_mode="sparse"
     )
 
-    print("==================================")   
-    print("Start timing module:")
+    print("============== Session Parameters ============")   
+    # print("Start timing module:")
     start_time = time.time()
     print("Program starts at time: ",start_time)
-    print("Batch size of training data: ",len(train_batches))
-    print("Batch size of validation data: ",len(val_batches))
-    print("Batch size of test data: ",len(test_batches))
+    print("Model name:  ",MODEL_NAME)
+    print("RUN_ID: ", RUN_ID)
+    print("Data directory: ",data_dir)
+    print("Model type: "+model_type)
+    
+    print("============== Session Hyperparameters =============")   
+    # print("Start timing module:")
+    print("Batch size: " + str(batch_size))
+    print("Epoch: " + str(epoch))
+    print("learning_rate: "+ str(learning_rate))
+    print("Training data batches: ",len(train_batches))
+    print("Validation data batches: ",len(val_batches))
+    print("Test data batches: ",len(test_batches))
 
     # Initial training of final layer
     history = model.fit_generator(
