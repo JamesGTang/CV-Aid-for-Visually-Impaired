@@ -10,33 +10,70 @@ from utils import orbi_model
 import time
 import os
 import pickle
+import json
+from datetime import date
+# run_param = {'RUN_ID':0,'Time',"Params","Hyperparameters","Files"}
+JSON = {}
+Time = {}
+Parameters = {}
+Hyperparameters = {}
+Files = {}
+Results = {}
+Graphs = {}
+
+# update run id in the file
+with open("./model/RUN_ID.log","r+") as f:
+    RUN_ID = str(int(f.readline()) + 1)
+    f.seek(0)
+    f.write(RUN_ID)
+    f.truncate()
+print("+++++++++++++++++++++++++++++++++++++++++++++\n\n\n\n")
+print("Initiating training run with RUN_ID: "+RUN_ID)
+print("\n\n\n\n+++++++++++++++++++++++++++++++++++++++++++++")
+# add run id to JSON
+JSON["RUN_ID"] = str(RUN_ID)
+
+# add time to JSON
+training_date = str(date.today())
+Time["Training date"]=training_date
+# with open("./model/train_result.json","w") as f:
+#     json.dump(run_param,f)
 
 """
 #
 # parameter to identify each training
-# RUN_ID: run ID that identify each training
 # MODEL_NAME: the name of the model
 # data_dir: where to get training data
 # 
 """
-RUN_ID = 0 
 # MODEL_NAME = "CV_aid_mobilenet_with_360_dataset"
 # data_dir = "../data_processing/training_data_360/"
 
-MODEL_NAME = "CV_aid_mobilenet_with_cam_dataset"
+MODEL_NAME = "CV_aid_mobilenet_cam"
 data_dir = "../data_processing/training_data_cam/"
-
 model_type = 'V1'  # V1, V2
+# add parameter to JSON
+Parameters["Model name"] = MODEL_NAME
+Parameters["Training data directory"] = data_dir
+Parameters["Model Type"] = model_type
 
+# print(JSON)
 """
 # hyperparameter related to training
 # batch_size, batch size to feed into traning
 # lr: learning rate for ADAM optimizer
 
 """
-batch_size = 64
+batch_size = 50
 learning_rate = 0.00025
 epoch = 50
+loss = "mean_squared_error"
+
+# add parameter to JSON
+Hyperparameters["Batch Size"] = batch_size
+Hyperparameters["Learning rate(ADAMS)"] = learning_rate
+Hyperparameters["Epoch"] = epoch
+Hyperparameters["Loss"] = loss
 
 # general variable to hold training information
 start_time = 0
@@ -65,7 +102,7 @@ def main():
         init_optimizer = Adam(lr=learning_rate)
         model.compile(
             init_optimizer, 
-            loss='mean_squared_error',
+            loss=loss,
             metrics=['accuracy']
         )
         preprocess = True
@@ -75,21 +112,31 @@ def main():
         init_optimizer = SGD(lr=learning_rate)
         model.compile(
             init_optimizer, 
-            loss='mean_squared_error',
+            loss=loss,
             metrics=['accuracy']
         )
         preprocess = True
     
     # save model
-    print("Saving model visual to file: "+'./graph/'+MODEL_NAME+"="+"RUN_ID"+'.png')
+    model_visual_fp = './graph/'+MODEL_NAME+"-"+RUN_ID+'.png'
+    print("Saving model visual to file: "+ model_visual_fp)
     if not os.path.isdir('./graph'):
         os.mkdir('./graph')
-    plot_model(model, to_file='./graph/'+MODEL_NAME+"="+"RUN_ID"+'.png')
+    plot_model(model, to_file=model_visual_fp)
+    Graphs["Model visual"] = model_visual_fp
     
+    architecture_fp = "./model/architecture/"+ MODEL_NAME + "-"+RUN_ID+'.json'
+    print("Saving model architecture to file: "+architecture_fp)
+    model_json = model.to_json()
+    with open(architecture_fp, "w") as json_file:
+        json.dump(model_json, json_file)
+    Files["Architecture"]=architecture_fp
+
     # checkpoint
-    if not os.path.isdir('./model'):
-        os.mkdir('./model')
-    filepath="./model/"+MODEL_NAME+"-"+str(RUN_ID)+str(model_type)+"-{epoch:02d}-{val_acc:.2f}.hdf5"
+    if not os.path.isdir('./model/weights/'+RUN_ID):
+        os.mkdir('./model/weights/'+RUN_ID)
+    filepath='./model/weights/'+ RUN_ID + "/" + MODEL_NAME + "-" + RUN_ID +"-{epoch:02d}-{val_acc:.2f}.hdf5"
+    Files["Weights"] = './model/weights/'+ RUN_ID + "/" + MODEL_NAME + "-" + RUN_ID + "****.hdf5"
     model_checkpoint = ModelCheckpoint(
         filepath, 
         monitor='val_acc', 
@@ -111,6 +158,7 @@ def main():
     # print("Start timing module:")
     start_time = time.time()
     print("Program starts at time: ",start_time)
+    Time["Start time"] = start_time
     print("Model name:  ",MODEL_NAME)
     print("RUN_ID: ", RUN_ID)
     print("Data directory: ",data_dir)
@@ -125,6 +173,9 @@ def main():
     print("Validation data batches: ",len(val_batches))
     print("Test data batches: ",len(test_batches))
 
+    Hyperparameters["Training data batches"] = len(train_batches)
+    Hyperparameters["Validation data batches"] = len(val_batches)
+    Hyperparameters["Test data batches"] = len(test_batches)
     # Initial training of final layer
     history = model.fit_generator(
         train_batches, 
@@ -134,13 +185,12 @@ def main():
         epochs=50, 
         callbacks=[model_checkpoint],
         verbose=1,
-    )
-
-    print(history)
-    
+    )    
     end_time = time.time()
     print("Program ends at time",end_time)
+    Time["End time"] = end_time
     total_time = (end_time - start_time)
+    Time["Total time(s)"] = str("%.3f" %total_time)
     print("Total time elapsed in training(s): " +str("%.3f" %total_time))
 
     # save history
@@ -149,7 +199,7 @@ def main():
         os.mkdir('./graph')
     with open('./graph/history_RUN_'+str(RUN_ID)+'.pkl','wb') as f:
         pickle.dump(history.history,f)
-    print(str(history.history))
+    Results["History"] = history.history
     # # for ft_layer_depth in ft_layers:
     # #     model = models.fine_tune(model, ft_layer_depth)
     # #     model.compile(SGD(lr=0.01), loss='mean_squared_error', metrics=['mae'])
@@ -173,6 +223,7 @@ def main():
     plt.ylabel('Loss',fontsize=14)
     plt.title('Loss Curves for Model'+MODEL_NAME+" Run ID: "+str(RUN_ID),fontsize=20)
     plt.savefig('./graph/RUN_'+str(RUN_ID)+'_loss_curve.png')
+    Graphs["Loss graph"]='./graph/RUN_'+str(RUN_ID)+'_loss_curve.png'
      
     # Accuracy Curves
     plt.figure(figsize=[16,9])
@@ -183,6 +234,31 @@ def main():
     plt.ylabel('Accuracy',fontsize=14)
     plt.title('Accuracy Curves for Model '+MODEL_NAME+" Run ID: "+str(RUN_ID),fontsize=20)
     plt.savefig('./graph/RUN_'+str(RUN_ID)+'_acc_curve.png')
+    Graphs["Accuracy graph"]='./graph/RUN_'+str(RUN_ID)+'_acc_curve.png'
+
+    # add all to JSON
+    JSON["Time"]=Time
+    JSON["Parameters"] = Parameters
+    JSON["Hyperparameters"] = Hyperparameters
+    JSON["Files"] = Files
+    JSON["Results"] = Results
+    JSON["Graphs"] = Graphs
+    DATA = {}
+    DATA[RUN_ID] = JSON
+
+    with open('./model/train_result.json') as f:
+        data = json.load(f)
+
+    # data.update(JSON.replace("\'", "\""))
+    data.update(DATA)
+
+    with open('./model/train_result.json', 'w') as f:
+        json.dump(obj=data, indent=4, fp=f)
+    
+    print("+++++++++++++++++++++++++++++++++++++++++++++\n\n\n\n")
+    print("Training result for RUN_ID: ")
+    print(JSON)
+    print("\n\n\n\n+++++++++++++++++++++++++++++++++++++++++++++")
 
 if __name__ == '__main__':
     main()

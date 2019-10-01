@@ -15,7 +15,7 @@ def mobilenetv1_transfer_learning(num_classes):
     x = GlobalAveragePooling2D()(x)
     x = Dropout(0.5, name='dropout')(x)
     x = Dense(1)(x)
-    predictions = ReLU(max_value=6.0)(x)
+    predictions = ReLU(max_value=6.0,name="RELU_FINAL")(x)
 
     model = Model(inputs=mobilenet.input, outputs=predictions)
 
@@ -35,7 +35,7 @@ def mobilenetv2_transfer_learning(num_classes):
     x = GlobalAveragePooling2D()(x)
     x = Dropout(0.5, name='dropout')(x)
     x = Dense(1)(x)
-    predictions = ReLU(max_value=6.0)(x)
+    predictions = ReLU(max_value=6.0, name="RELU_FINAL")(x)
 
     # x = GlobalAveragePooling2D()(x)
     # predictions = Dense(num_classes, activation='softmax', name='act_softmax')(x)
