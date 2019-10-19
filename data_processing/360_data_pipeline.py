@@ -19,7 +19,7 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 # modify these two parameters according to folder structure
 ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
 # ORBI_DATA_ROOT = '../orbi_sample/'
-PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
+PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed_1/'
 # modify this file to specify the size of the final image
 ADJ_SIZE = (426,240)
 ADJ_SIZE2 = (1920,1080)
@@ -248,10 +248,10 @@ class DATA_PIPELINE():
         # remove cam directory and recreate
         if not os.path.exists(PROCESSED_ORBI_ROOT):
             os.makedirs(PROCESSED_ORBI_ROOT)
-        else:  
-            print(PROCESSED_ORBI_ROOT+' exists, will be removed')
-            shutil.rmtree(PROCESSED_ORBI_ROOT, ignore_errors=True)
-            os.makedirs(PROCESSED_ORBI_ROOT)
+        # else:  
+        #     print(PROCESSED_ORBI_ROOT+' exists, will be removed')
+        #     shutil.rmtree(PROCESSED_ORBI_ROOT, ignore_errors=True)
+        #     os.makedirs(PROCESSED_ORBI_ROOT)
 
         matches = []
         folder_idx = 1
