@@ -96,22 +96,22 @@ class IMG_LABELLER():
                 if read_key in actions.values():
                     label = int([key for (key, value) in actions.items() if value == read_key][0])
                     print(label)
-                    if(label==9):
-                        new_fname = DISCARD+str(label)+"/%05d.jpg" % (img_idx+init_idx)
-                        cv2.imwrite(new_fname, orig_img)
-                        print("discard: "+new_fname)
-                        labelled = 1
-                    else:
-                        new_fname = DIR_LABELLED+str(label)+"/%05d.jpg" % (img_idx+init_idx)
-                        cv2.imwrite(new_fname, orig_img)
+                    # if(label==9):
+                    #     new_fname = DISCARD+str(label)+"/%05d.jpg" % (img_idx+init_idx)
+                    #     cv2.imwrite(new_fname, orig_img)
+                    #     print("discard: "+new_fname)
+                    #     labelled = 1
+                    # else:
+                    new_fname = DIR_LABELLED+str(label)+"/%05d.jpg" % (img_idx+init_idx)
+                    cv2.imwrite(new_fname, orig_img)
 
-                        if label != 0 or label != 4:
-                            rotated_img = cv2.flip(orig_img, 1)
-                            new_label = len(actions) - label
-                            new_fname = DIR_LABELLED+str(new_label)+"/%05d.jpg" % (img_idx+init_idx)
-                            cv2.imwrite(new_fname, rotated_img)
+                    if label != 0 or label != 4:
+                        rotated_img = cv2.flip(orig_img, 1)
+                        new_label = len(actions) - label
+                        new_fname = DIR_LABELLED+str(new_label)+"/%05d.jpg" % (img_idx+init_idx)
+                        cv2.imwrite(new_fname, rotated_img)
 
-                        os.rename(fname, DIR_ARCHIVE+"%05d.jpg" % (img_idx+init_idx))
-                        labelled = 1
+                    os.rename(fname, DIR_ARCHIVE+"%05d.jpg" % (img_idx+init_idx))
+                    labelled = 1
 
             cv2.destroyAllWindows()

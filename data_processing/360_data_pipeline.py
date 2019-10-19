@@ -17,8 +17,8 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 """
 
 # modify these two parameters according to folder structure
-# ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904'
-ORBI_DATA_ROOT = '../orbi_sample/'
+ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
+# ORBI_DATA_ROOT = '../orbi_sample/'
 PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
 # modify this file to specify the size of the final image
 ADJ_SIZE = (426,240)
@@ -323,8 +323,8 @@ class DATA_PIPELINE():
 
                             cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",leftIMG)
                             cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg",leftEyeIMG)
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightEyeIMG)
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",rightIMG)
+                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
+                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",rightEyeIMG)
 
                             # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",cv2.resize(leftIMG[420:1500,0:1080], (684, 684)))
                             # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg",cv2.resize(leftEyeIMG[420:1500,0:1080], (684, 684)))
