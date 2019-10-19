@@ -19,7 +19,7 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 # modify these two parameters according to folder structure
 ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
 # ORBI_DATA_ROOT = '../orbi_sample/'
-PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed_1/'
+PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
 # modify this file to specify the size of the final image
 ADJ_SIZE = (426,240)
 ADJ_SIZE2 = (1920,1080)
