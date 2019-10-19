@@ -1,4 +1,4 @@
-import cv2
+ import cv2
 import glob
 import os
 
@@ -55,6 +55,10 @@ class IMG_LABELLER():
             fontColor              = (0,0,255)
             lineType               = 2
 
+            # text for displaying other information
+            fontColor1              = (255,0,0)
+
+
             x = image.shape[1]//8
             line = 0
             for i in range(10):
@@ -71,10 +75,17 @@ class IMG_LABELLER():
             labelled = 0
 
             #Positioning frame properly on screen
-            windowName = "Centered Window"
+            windowName = "Label images"
             cv2.namedWindow(windowName)
             #Change the x,y coordinate to center the frame on your screen
             #Size that works best for Adeeb's display - (monitor: -1000, -1000. Laptop screen: 200, 30)
+            # cv2.putText(image, 
+            #         str("Hellow world"),
+            #         bottomLeftCornerOfText,
+            #         font, 
+            #         fontScale,
+            #         fontColor1,
+            #         lineType)
             cv2.moveWindow(windowName, 200, 30)
             cv2.imshow(windowName, image)
 

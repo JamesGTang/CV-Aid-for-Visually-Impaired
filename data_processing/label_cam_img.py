@@ -12,6 +12,7 @@ actions = {
     '5': 53,
     '6': 54,
     '7': 55,
+    '9': 57,
 }
 
 """
@@ -23,21 +24,26 @@ This script allows user to label the data interactively by using keyboard.
 """
 class IMG_LABELLER():
     def label_all(self,root_path):
+        print(root_path)
         DIR_UNLABELLED = root_path
         DIR_ARCHIVE = DIR_UNLABELLED+"/archives/"
         DIR_LABELLED = root_path + "/labelled_data/"
-        
+        DISCARD = root_path +"/discard/"
         if not os.path.isdir(DIR_ARCHIVE):
             os.mkdir(DIR_ARCHIVE)
         init_idx = len(glob.glob(DIR_ARCHIVE+"*.jpg"))
 
         if not os.path.isdir(DIR_LABELLED):
             os.mkdir(DIR_LABELLED)
+        
+        if not os.path.isdir(DISCARD):
+            os.mkdir(DISCARD)
+        
         for i in range(len(actions)):
             if not os.path.isdir(DIR_LABELLED+str(i)):
                 os.mkdir(DIR_LABELLED+str(i))
 
-        all_fnames = sorted(glob.glob(DIR_UNLABELLED+"*.jpg"))
+        all_fnames = sorted(glob.glob(DIR_UNLABELLED+"/*.jpg"))
         print("Number of Frames: ", len(all_fnames))
         for img_idx, fname in enumerate(all_fnames):
             if img_idx % 100 == 0:
@@ -67,7 +73,13 @@ class IMG_LABELLER():
                     fontColor,
                     lineType)
                 line += int(x)
-
+            cv2.putText(
+                image, "If the image is bad, use 9 to discard",
+                (150,670), 
+                font, 
+                0.8,
+                fontColor,
+                1)
             labelled = 0
 
             #Positioning frame properly on screen
@@ -83,16 +95,23 @@ class IMG_LABELLER():
 
                 if read_key in actions.values():
                     label = int([key for (key, value) in actions.items() if value == read_key][0])
-                    new_fname = DIR_LABELLED+str(label)+"/%05d.jpg" % (img_idx+init_idx)
-                    cv2.imwrite(new_fname, orig_img)
+                    print(label)
+                    if(label==9):
+                        new_fname = DISCARD+str(label)+"/%05d.jpg" % (img_idx+init_idx)
+                        cv2.imwrite(new_fname, orig_img)
+                        print("discard: "+new_fname)
+                        labelled = 1
+                    else:
+                        new_fname = DIR_LABELLED+str(label)+"/%05d.jpg" % (img_idx+init_idx)
+                        cv2.imwrite(new_fname, orig_img)
 
-                    if label != 0 or label != 4:
-                        rotated_img = cv2.flip(orig_img, 1)
-                        new_label = len(actions) - label
-                        new_fname = DIR_LABELLED+str(new_label)+"/%05d.jpg" % (img_idx+init_idx)
-                        cv2.imwrite(new_fname, rotated_img)
+                        if label != 0 or label != 4:
+                            rotated_img = cv2.flip(orig_img, 1)
+                            new_label = len(actions) - label
+                            new_fname = DIR_LABELLED+str(new_label)+"/%05d.jpg" % (img_idx+init_idx)
+                            cv2.imwrite(new_fname, rotated_img)
 
-                    os.rename(fname, DIR_ARCHIVE+"%05d.jpg" % (img_idx+init_idx))
-                    labelled = 1
+                        os.rename(fname, DIR_ARCHIVE+"%05d.jpg" % (img_idx+init_idx))
+                        labelled = 1
 
             cv2.destroyAllWindows()
