@@ -67,9 +67,9 @@ class util:
         # W: is the sensor width expressed in world units, let's say mm
         # w: is the image width expressed in pixel
         # fx: is the focal length expressed in pixel units (as is in the camera matrix )
-        H = 1944 * 1.5 / 100
+        H = 1944 * 1.4 / 100
         h = 1944
-        W = 2592 * 1.5 / 100
+        W = 2592 * 1.4 / 100
         w = 2592
         fx = focal_length / W * w
         fy = focal_length / H * h

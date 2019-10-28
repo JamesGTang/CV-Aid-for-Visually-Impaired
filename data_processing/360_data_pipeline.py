@@ -19,10 +19,10 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 """
 
 # modify these two parameters according to folder structure
-ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
-# ORBI_DATA_ROOT = '../orbi_sample/'
-# PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
-PROCESSED_ORBI_ROOT = '../orbi_360_processed/'
+# ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
+ORBI_DATA_ROOT = '../orbi_sample/'
+PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
+# PROCESSED_ORBI_ROOT = '../orbi_360_processed/'
 # PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
 # modify this file to specify the size of the final image
 ADJ_SIZE = (426,240)
@@ -30,7 +30,7 @@ ADJ_SIZE2 = (1920,1080)
 ADJ_SIZE3 = (600,600)
 
 
-
+# git add .; git commit -m "more data"; git push origin master
 class DATA_PIPELINE():
     def __init__(self):
         # determine if we are using OpenCV v3.X
