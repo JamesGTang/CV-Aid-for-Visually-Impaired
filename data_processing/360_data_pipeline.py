@@ -17,9 +17,10 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 """
 
 # modify these two parameters according to folder structure
-ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
-# ORBI_DATA_ROOT = '../orbi_sample/'
-PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
+# ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
+ORBI_DATA_ROOT = '../orbi_sample/'
+PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
+# PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
 # modify this file to specify the size of the final image
 ADJ_SIZE = (426,240)
 ADJ_SIZE2 = (1920,1080)
@@ -29,8 +30,8 @@ ADJ_SIZE2 = (1920,1080)
 class DATA_PIPELINE():
     def __init__(self):
         # determine if we are using OpenCV v3.X
-        self.isv3 = imutils.is_cv3(or_better=True)    
-    
+        # self.isv3 = imutils.is_cv3(or_better=True)    
+        pass
     # rotate image and replace original image
     def rotate_img(self,img,rot_deg):
         # rotate ccw
@@ -188,10 +189,10 @@ class DATA_PIPELINE():
                     if success_left==True:
                         if framecount == (fps * 0.3) and success_right==True and success_leftEye==True and success_rightEye==True:
                             #resize all images
-                            leftIMG = cv2.resize(leftIMG,ADJ_SIZE2)
-                            leftEyeIMG = cv2.resize(leftEyeIMG,ADJ_SIZE2)
-                            rightIMG = cv2.resize(rightIMG,ADJ_SIZE2)
-                            rightEyeIMG = cv2.resize(rightEyeIMG,ADJ_SIZE2)                  
+                            # leftIMG = cv2.resize(leftIMG,ADJ_SIZE2)
+                            # leftEyeIMG = cv2.resize(leftEyeIMG,ADJ_SIZE2)
+                            # rightIMG = cv2.resize(rightIMG,ADJ_SIZE2)
+                            # rightEyeIMG = cv2.resize(rightEyeIMG,ADJ_SIZE2)                  
                             
                             # warp transform
                             # w,h,c = leftIMG.shape
@@ -209,12 +210,17 @@ class DATA_PIPELINE():
                             rightEyeIMG = self.rotate_img(rightEyeIMG,+1) #right eye image rotate 90 deg CCW
                             rightIMG = self.rotate_img(rightIMG,0) #right image rotate 90 deg CW
                             framecount = 0
+
+                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",leftIMG)
+                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg",leftEyeIMG)
+                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
+                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",rightEyeIMG)
                             
                             # undistort
-                            leftIMG = undistort_util.undistort(leftIMG)
-                            leftEyeIMG = undistort_util.undistort(leftEyeIMG)                            
-                            rightEyeIMG = undistort_util.undistort(rightEyeIMG)
-                            rightIMG = undistort_util.undistort(rightIMG)
+                            # leftIMG = undistort_util.undistort(leftIMG)
+                            # leftEyeIMG = undistort_util.undistort(leftEyeIMG)                            
+                            # rightEyeIMG = undistort_util.undistort(rightEyeIMG)
+                            # rightIMG = undistort_util.undistort(rightIMG)
 
                             # cv2.imshow("warp",leftIMG)
                             # cv2.imshow("lefteye",leftEyeIMG)
@@ -224,13 +230,13 @@ class DATA_PIPELINE():
                             # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"r"+".jpg",rightIMG)
 
                             # stitch
-                            left_part = self.stitch([leftIMG,leftEyeIMG])
-                            right_part = self.stitch([rightIMG,rightEyeIMG])
-                            print(left_part.shape)
-                            print(right_part.shape)
-                            IMG = np.hstack((left_part,right_part))
+                            # left_part = self.stitch([leftIMG,leftEyeIMG])
+                            # right_part = self.stitch([rightIMG,rightEyeIMG])
+                            # print(left_part.shape)
+                            # print(right_part.shape)
+                            # IMG = np.hstack((left_part,right_part))
 
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+".jpg",IMG)
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+".jpg",IMG)
                             
                             file_idx += 1 
                             # # Check end of video
@@ -350,6 +356,6 @@ class DATA_PIPELINE():
         iu.label_all("./labelled_cam")
 
 dp = DATA_PIPELINE()
-dp.process_all_undistort()
-# dp.process_all_undistort_stitch()
+# dp.process_all_undistort()
+dp.process_all_undistort_stitch()
 # dp.label_all_img()
