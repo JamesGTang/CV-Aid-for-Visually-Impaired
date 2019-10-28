@@ -59,7 +59,7 @@ class util:
         # "k3": "-0.05000000074505806",
         # "k4": "0.014999999664723873",
         D = np.array([[0.2199999988079071],[-0.03999999910593033],[-0.05000000074505806],[0.014999999664723873]])
-        focal_length = 6.5 # focal length in mm
+        focal_length = 7.5 # focal length in mm
         # calculate the focal length fx,fy using estimation
         # assumption: CMOS sensor specification similar to: http://www.superpix.com.cn/cn/xiazai/SP5508.pdf
         # assumption: focal length is 8mm - 10mm 
@@ -67,9 +67,9 @@ class util:
         # W: is the sensor width expressed in world units, let's say mm
         # w: is the image width expressed in pixel
         # fx: is the focal length expressed in pixel units (as is in the camera matrix )
-        H = 1944 * 1.12 / 100
+        H = 1944 * 1.5 / 100
         h = 1944
-        W = 2592 * 1.12 / 100
+        W = 2592 * 1.5 / 100
         w = 2592
         fx = focal_length / W * w
         fy = focal_length / H * h

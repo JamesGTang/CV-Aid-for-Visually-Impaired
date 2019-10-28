@@ -4,6 +4,8 @@ import os
 import numpy as np
 import cv2
 import imutils
+import subprocess
+import subprocess
 from label_cam_img import IMG_LABELLER
 from undistort import util
 """
@@ -17,13 +19,15 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 """
 
 # modify these two parameters according to folder structure
-# ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
-ORBI_DATA_ROOT = '../orbi_sample/'
-PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
+ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
+# ORBI_DATA_ROOT = '../orbi_sample/'
+# PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
+PROCESSED_ORBI_ROOT = '../orbi_360_processed/'
 # PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
 # modify this file to specify the size of the final image
 ADJ_SIZE = (426,240)
 ADJ_SIZE2 = (1920,1080)
+ADJ_SIZE3 = (600,600)
 
 
 
@@ -167,76 +171,68 @@ class DATA_PIPELINE():
             else:
                 # make a directory in destination folder
                 # print("Files to be processed"+all_files_in_dir)
-                leftVid = cv2.VideoCapture(all_files_in_dir[3])
+                # leftVid = cv2.VideoCapture(all_files_in_dir[3])
                 leftEyeVid = cv2.VideoCapture(all_files_in_dir[2])
-                rightVid = cv2.VideoCapture(all_files_in_dir[0])
+                # rightVid = cv2.VideoCapture(all_files_in_dir[0])
                 rightEyeVid = cv2.VideoCapture(all_files_in_dir[1])
                 # since all videos have same framerate, only sample one video for FPS
-                fps = leftVid.get(cv2.CAP_PROP_FPS)
+                fps = leftEyeVid.get(cv2.CAP_PROP_FPS)
                 framecount = 0
                 
                 # count the frames for capture
                 while(True):
                     # Capture frame-by-frame
-                    success_left, leftIMG = leftVid.read()
+                    # success_left, leftIMG = leftVid.read()
                     success_leftEye, leftEyeIMG = leftEyeVid.read()
-                    success_right, rightIMG = rightVid.read()
+                    # success_right, rightIMG = rightVid.read()
                     success_rightEye, rightEyeIMG = rightEyeVid.read()
 
                     framecount += 1
 
                     # Check if this is the frame closest to 1 seconds
-                    if success_left==True:
-                        if framecount == (fps * 0.3) and success_right==True and success_leftEye==True and success_rightEye==True:
+                    if success_leftEye==True:
+                        if framecount == (fps * 0.2) and success_rightEye==True:  #and success_rightEye==True and success_right==True:
                             #resize all images
                             # leftIMG = cv2.resize(leftIMG,ADJ_SIZE2)
-                            # leftEyeIMG = cv2.resize(leftEyeIMG,ADJ_SIZE2)
+                            leftEyeIMG = cv2.resize(leftEyeIMG,ADJ_SIZE2)
                             # rightIMG = cv2.resize(rightIMG,ADJ_SIZE2)
-                            # rightEyeIMG = cv2.resize(rightEyeIMG,ADJ_SIZE2)                  
-                            
-                            # warp transform
-                            # w,h,c = leftIMG.shape
-                            # rotation_matrix = undistort_util.get_rotation_matrix()
-                            # # cv2.imshow("left",rightIMG)
-                            # print("matrix: ",rotation_matrix[0])
-                            # leftIMG = cv2.warpPerspective(leftIMG,rotation_matrix[0],(w,h))
-                            # leftEyeIMG = cv2.warpPerspective(leftEyeIMG,rotation_matrix[1],(w,h))
-                            # rightEyeIMG = cv2.warpPerspective(rightEyeIMG,rotation_matrix[2],(1080,1920))
-                            # rightIMG = cv2.warpPerspective(rightIMG,rotation_matrix[3],(1080,1920))
+                            rightEyeIMG = cv2.resize(rightEyeIMG,ADJ_SIZE2)                  
 
                             #rotate images
-                            leftIMG = self.rotate_img(leftIMG,0) #left image rotate 90 deg CCW
-                            leftEyeIMG = self.rotate_img(leftEyeIMG,+1) #left eye image rotate 90 deg CCW
+                            # leftIMG = self.rotate_img(leftIMG,0) #left image rotate 90 deg CCW
+                            leftEyeIMG = self.rotate_img(leftEyeIMG,0) #left eye image rotate 90 deg CCW
                             rightEyeIMG = self.rotate_img(rightEyeIMG,+1) #right eye image rotate 90 deg CCW
-                            rightIMG = self.rotate_img(rightIMG,0) #right image rotate 90 deg CW
-                            framecount = 0
-
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",leftIMG)
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg",leftEyeIMG)
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",rightEyeIMG)
                             
                             # undistort
-                            # leftIMG = undistort_util.undistort(leftIMG)
-                            # leftEyeIMG = undistort_util.undistort(leftEyeIMG)                            
-                            # rightEyeIMG = undistort_util.undistort(rightEyeIMG)
-                            # rightIMG = undistort_util.undistort(rightIMG)
+                            leftEyeIMG = undistort_util.undistort(leftEyeIMG)                            
+                            rightEyeIMG = undistort_util.undistort(rightEyeIMG)
 
-                            # cv2.imshow("warp",leftIMG)
-                            # cv2.imshow("lefteye",leftEyeIMG)
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"0"+".jpg",leftIMG)
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"l1"+".jpg",leftEyeIMG)
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"re"+".jpg",rightEyeIMG)
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"r"+".jpg",rightIMG)
+                            # rightIMG = self.rotate_img(rightIMG,0) #right image rotate 90 deg CW
+                            framecount = 0
+                            left_fp = PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg"
+                            right_fp = PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg"
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",leftIMG)
+                            cv2.imwrite(left_fp,leftEyeIMG)
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
+                            cv2.imwrite(right_fp,rightEyeIMG)
+                            
+                            cmd = "./image-stitching " +  left_fp + " " + right_fp
+                            res = subprocess.call(cmd,shell=True)
+                            # print("---------------------------------")
+                            # print(res)
+                            if res == 0:
+                                move_to_fp = PROCESSED_ORBI_ROOT + str(file_idx) + ".jpg"
+                                shutil.move("out.jpg", move_to_fp)
+                                img = cv2.imread(move_to_fp, cv2.IMREAD_UNCHANGED)
+                                img= cv2.resize(img,ADJ_SIZE3)
+                                cv2.imwrite(move_to_fp,img)
 
-                            # stitch
-                            # left_part = self.stitch([leftIMG,leftEyeIMG])
-                            # right_part = self.stitch([rightIMG,rightEyeIMG])
-                            # print(left_part.shape)
-                            # print(right_part.shape)
-                            # IMG = np.hstack((left_part,right_part))
+                            else:
+                                print("error when processing: " + left_fp + " , " + right_fp)
+                            
 
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+".jpg",IMG)
+                            os.remove(left_fp)
+                            os.remove(right_fp)
                             
                             file_idx += 1 
                             # # Check end of video
@@ -316,12 +312,6 @@ class DATA_PIPELINE():
                             rightIMG = self.rotate_img(rightIMG,0) #right image rotate 90 deg CW
                             framecount = 0
                             
-                            # image = cv2.resize(image, (684, 684))
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"0"+".jpg",leftIMG)
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"l1"+".jpg",leftEyeIMG)
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"re"+".jpg",rightEyeIMG)
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+"original-"+str(file_idx)+"r"+".jpg",rightIMG)
-
                             leftIMG = undistort_util.undistort(leftIMG)
                             leftEyeIMG = undistort_util.undistort(leftEyeIMG)                            
                             rightEyeIMG = undistort_util.undistort(rightEyeIMG)
@@ -331,14 +321,8 @@ class DATA_PIPELINE():
                             cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg",leftEyeIMG)
                             cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
                             cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",rightEyeIMG)
-
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",cv2.resize(leftIMG[420:1500,0:1080], (684, 684)))
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg",cv2.resize(leftEyeIMG[420:1500,0:1080], (684, 684)))
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",cv2.resize(rightEyeIMG[420:1500,0:1080], (684, 684)))
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",cv2.resize(rightIMG[420:1500,0:1080], (684, 684)))
-
-
                             file_idx += 1 
+                            
                             # # Check end of video
                             if cv2.waitKey(1) & 0xFF == ord('q'):
                                   break
