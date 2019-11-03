@@ -95,7 +95,7 @@ class IMG_LABELLER():
 
                 if read_key in actions.values():
                     label = int([key for (key, value) in actions.items() if value == read_key][0])
-                    print(label)
+                    print("Selected: " + str(label));
                     # if(label==9):
                     #     new_fname = DISCARD+str(label)+"/%05d.jpg" % (img_idx+init_idx)
                     #     cv2.imwrite(new_fname, orig_img)

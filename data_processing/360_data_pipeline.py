@@ -347,6 +347,6 @@ class DATA_PIPELINE():
         iu.label_all("./labelled_cam")
 
 dp = DATA_PIPELINE()
-dp.process_all_undistort()
+# dp.process_all_undistort()
 # dp.process_all_undistort_stitch()
-# dp.label_all_img()
+dp.label_all_img()
