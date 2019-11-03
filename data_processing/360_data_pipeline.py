@@ -21,7 +21,8 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 # modify these two parameters according to folder structure
 # ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
 ORBI_DATA_ROOT = '../orbi_sample/'
-PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
+# PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
+PROCESSED_ORBI_ROOT = '../orbi_sample_simulation/'
 # PROCESSED_ORBI_ROOT = '../orbi_360_processed/'
 # PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
 # modify this file to specify the size of the final image
@@ -298,7 +299,7 @@ class DATA_PIPELINE():
 
                     # Check if this is the frame closest to 1 seconds
                     if success_left==True:
-                        if framecount == (fps * 0.3) and success_right==True and success_leftEye==True and success_rightEye==True:
+                        if framecount == (fps * 0.1) and success_right==True and success_leftEye==True and success_rightEye==True:
                             #resize all images
                             leftIMG = cv2.resize(leftIMG,ADJ_SIZE2)
                             leftEyeIMG = cv2.resize(leftEyeIMG,ADJ_SIZE2)
@@ -317,10 +318,16 @@ class DATA_PIPELINE():
                             rightEyeIMG = undistort_util.undistort(rightEyeIMG)
                             rightIMG = undistort_util.undistort(rightIMG)
 
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",leftIMG)
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg",leftEyeIMG)
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
-                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",rightEyeIMG)
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",leftIMG)
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg",leftEyeIMG)
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",rightEyeIMG)
+                            
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",leftIMG)
+                            cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx) + ".jpg",leftEyeIMG)
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
+                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"3"+".jpg",rightEyeIMG)
+
                             file_idx += 1 
                             
                             # # Check end of video
@@ -340,6 +347,6 @@ class DATA_PIPELINE():
         iu.label_all("./labelled_cam")
 
 dp = DATA_PIPELINE()
-# dp.process_all_undistort()
-dp.process_all_undistort_stitch()
+dp.process_all_undistort()
+# dp.process_all_undistort_stitch()
 # dp.label_all_img()
