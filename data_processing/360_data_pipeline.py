@@ -19,10 +19,10 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 """
 
 # modify these two parameters according to folder structure
-# ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
-ORBI_DATA_ROOT = '../orbi_sample/'
+ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
+# ORBI_DATA_ROOT = '../orbi_sample/'
 # PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
-PROCESSED_ORBI_ROOT = '../orbi_sample_simulation/'
+PROCESSED_ORBI_ROOT = '../orbi_stitched/'
 # PROCESSED_ORBI_ROOT = '../orbi_360_processed/'
 # PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
 # modify this file to specify the size of the final image
@@ -278,7 +278,6 @@ class DATA_PIPELINE():
                     print("Folder: "+root+" is corrputed, is skipped")
             else:
                 # make a directory in destination folder
-                # print("Files to be processed"+all_files_in_dir)
                 leftVid = cv2.VideoCapture(all_files_in_dir[3])
                 leftEyeVid = cv2.VideoCapture(all_files_in_dir[2])
                 rightVid = cv2.VideoCapture(all_files_in_dir[0])
@@ -348,5 +347,5 @@ class DATA_PIPELINE():
 
 dp = DATA_PIPELINE()
 # dp.process_all_undistort()
-# dp.process_all_undistort_stitch()
-dp.label_all_img()
+dp.process_all_undistort_stitch()
+# dp.label_all_img()
