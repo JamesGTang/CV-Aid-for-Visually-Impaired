@@ -347,5 +347,5 @@ class DATA_PIPELINE():
 
 dp = DATA_PIPELINE()
 # dp.process_all_undistort()
-dp.process_all_undistort_stitch()
-# dp.label_all_img()
+# dp.process_all_undistort_stitch()
+dp.label_all_img()
