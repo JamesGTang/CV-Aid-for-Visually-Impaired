@@ -1,10 +1,11 @@
-from keras.optimizers import Adam, SGD, RMSprop
+import tensorflow as tf
+from tensorflow.keras.optimizers import Adam, SGD, RMSprop
 # from utils import models, prediction_utils, save_model_pb
 from sklearn.metrics import confusion_matrix, accuracy_score, mean_absolute_error
 from utils.load_data import load_data
 
-from keras.callbacks import ModelCheckpoint
-from keras.utils import plot_model
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.utils import plot_model
 from matplotlib import pyplot as plt
 from utils import orbi_model
 import time
@@ -12,6 +13,8 @@ import os
 import pickle
 import json
 from datetime import date
+import numpy
+
 # run_param = {'RUN_ID':0,'Time',"Params","Hyperparameters","Files"}
 JSON = {}
 Time = {}
@@ -20,6 +23,10 @@ Hyperparameters = {}
 Files = {}
 Results = {}
 Graphs = {}
+
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+session = tf.compat.v1.Session(config=config)
 
 # update run id in the file
 with open("./model/RUN_ID.log","r+") as f:
@@ -64,7 +71,7 @@ Parameters["Model Type"] = model_type
 # lr: learning rate for ADAM optimizer
 
 """
-batch_size = 50
+batch_size = 64
 learning_rate = 0.00025
 epoch = 50
 loss = "mean_squared_error"
@@ -81,8 +88,6 @@ end_time = 0
 
 
 def main():
-    # Training Params
-    batch_size = 64
     # # load the right pre-trained model and set the corresponding optimizer
     # if model_type == 'V1':
     #     model, ft_layers = models.mobilenetv1_transfer_learning(num_classes=8)
@@ -182,7 +187,7 @@ def main():
         steps_per_epoch=train_batches.n//batch_size, 
         validation_data=val_batches,
         validation_steps=val_batches.n//batch_size, 
-        epochs=50, 
+        epochs=epoch, 
         callbacks=[model_checkpoint],
         verbose=1,
     )    
@@ -200,6 +205,7 @@ def main():
     with open('./graph/history_RUN_'+str(RUN_ID)+'.pkl','wb') as f:
         pickle.dump(history.history,f)
     Results["History"] = history.history
+    print(history.history)
     # # for ft_layer_depth in ft_layers:
     # #     model = models.fine_tune(model, ft_layer_depth)
     # #     model.compile(SGD(lr=0.01), loss='mean_squared_error', metrics=['mae'])
@@ -253,12 +259,22 @@ def main():
     data.update(DATA)
 
     with open('./model/train_result.json', 'w') as f:
-        json.dump(obj=data, indent=4, fp=f)
+        json.dump(obj=data, indent=4, fp=f, cls=MyEncoder)
     
     print("+++++++++++++++++++++++++++++++++++++++++++++\n\n\n\n")
     print("Training result for RUN_ID: ")
     print(JSON)
     print("\n\n\n\n+++++++++++++++++++++++++++++++++++++++++++++")
 
+class MyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, numpy.integer):
+            return int(obj)
+        elif isinstance(obj, numpy.floating):
+            return float(obj)
+        elif isinstance(obj, numpy.ndarray):
+            return obj.tolist()
+        else:
+            return super(MyEncoder, self).default(obj)
 if __name__ == '__main__':
     main()

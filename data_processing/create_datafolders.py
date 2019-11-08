@@ -14,8 +14,12 @@ This script splits the dataset into traning, validation and testing sets
 """
 
 
-LABELLED_DIR = "../orbi_processed/labelled_data/"
-SPLIT_DIR = "./training_data_orbi/"
+# LABELLED_DIR = "../orbi_processed/labelled_data/"
+# SPLIT_DIR = "./training_data_orbi/"
+
+LABELLED_DIR = "./labelled_cam/labelled_data/"
+SPLIT_DIR = "./training_data_cam/"
+
 Train_Valid_Test_Split = [0.8, 0.1, 0.1]
 NUM_ACTIONS = 8
 

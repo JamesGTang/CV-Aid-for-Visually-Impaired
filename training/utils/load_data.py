@@ -1,12 +1,12 @@
-from keras_preprocessing.image import ImageDataGenerator
-import keras
-import keras.applications.mobilenet
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import tensorflow.keras
+import tensorflow.keras.applications.mobilenet
 
 
 def load_data(batch_size, head_dir, preprocess=True, class_mode="categorical"):
 
     if preprocess:
-        preprocess_fn = keras.applications.mobilenet_v2.preprocess_input
+        preprocess_fn = tensorflow.keras.applications.mobilenet_v2.preprocess_input
     else:
         preprocess_fn=None
 
