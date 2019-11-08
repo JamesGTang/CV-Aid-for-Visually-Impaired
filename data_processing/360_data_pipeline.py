@@ -207,8 +207,8 @@ class DATA_PIPELINE():
                             # undistort
                             leftEyeIMG = undistort_util.undistort(leftEyeIMG)                            
                             rightEyeIMG = undistort_util.undistort(rightEyeIMG)
-                            cv2.imshow("l", leftEyeIMG)
-                            cv2.imshow("r",rightEyeIMG)
+                            # cv2.imshow("l", leftEyeIMG)
+                            # cv2.imshow("r",rightEyeIMG)
                             # rightIMG = self.rotate_img(rightIMG,0) #right image rotate 90 deg CW
                             framecount = 0
                             left_fp = PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg"
