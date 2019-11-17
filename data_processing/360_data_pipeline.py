@@ -346,7 +346,15 @@ class DATA_PIPELINE():
         print("labeling images")
         iu.label_all("./labelled_cam")
 
+    def label_all_360(self):
+        print("start labelling now")
+        # init image utility object
+        iu = IMG_LABELLER()
+        print("labeling images")
+        iu.label_all("./labelled_360")        
+
 dp = DATA_PIPELINE()
 # dp.process_all_undistort()
-dp.process_all_undistort_stitch()
+# dp.process_all_undistort_stitch()
 # dp.label_all_img()
+dp.label_all_360()
