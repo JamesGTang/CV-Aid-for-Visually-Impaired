@@ -22,7 +22,7 @@ and PROCESSED_ORBI_ROOT for where to store the processed images.
 ORBI_DATA_ROOT = '../../CV_VI_original_data/201901-201904/'
 # ORBI_DATA_ROOT = '../orbi_sample/'
 # PROCESSED_ORBI_ROOT = '../orbi_sample_processed/'
-PROCESSED_ORBI_ROOT = '../orbi_stitched/'
+PROCESSED_ORBI_ROOT = './labelled_360/'
 # PROCESSED_ORBI_ROOT = '../orbi_360_processed/'
 # PROCESSED_ORBI_ROOT = '../orbi_to_cam_processed/'
 # modify this file to specify the size of the final image
@@ -173,9 +173,10 @@ class DATA_PIPELINE():
                 # make a directory in destination folder
                 # print("Files to be processed"+all_files_in_dir)
                 # leftVid = cv2.VideoCapture(all_files_in_dir[3])
+                print(all_files_in_dir)
                 leftEyeVid = cv2.VideoCapture(all_files_in_dir[2])
                 # rightVid = cv2.VideoCapture(all_files_in_dir[0])
-                rightEyeVid = cv2.VideoCapture(all_files_in_dir[1])
+                rightEyeVid = cv2.VideoCapture(all_files_in_dir[0])
                 # since all videos have same framerate, only sample one video for FPS
                 fps = leftEyeVid.get(cv2.CAP_PROP_FPS)
                 framecount = 0
@@ -198,23 +199,23 @@ class DATA_PIPELINE():
                             leftEyeIMG = cv2.resize(leftEyeIMG,ADJ_SIZE2)
                             # rightIMG = cv2.resize(rightIMG,ADJ_SIZE2)
                             rightEyeIMG = cv2.resize(rightEyeIMG,ADJ_SIZE2)                  
-
                             #rotate images
                             # leftIMG = self.rotate_img(leftIMG,0) #left image rotate 90 deg CCW
-                            leftEyeIMG = self.rotate_img(leftEyeIMG,0) #left eye image rotate 90 deg CCW
-                            rightEyeIMG = self.rotate_img(rightEyeIMG,+1) #right eye image rotate 90 deg CCW
+                            leftEyeIMG = self.rotate_img(leftEyeIMG,+1) #left eye image rotate 90 deg CCW
+                            rightEyeIMG = self.rotate_img(rightEyeIMG,0) #right eye image rotate 90 deg CCW
                             
                             # undistort
                             leftEyeIMG = undistort_util.undistort(leftEyeIMG)                            
                             rightEyeIMG = undistort_util.undistort(rightEyeIMG)
-
+                            # cv2.imshow("l", leftEyeIMG)
+                            # cv2.imshow("r",rightEyeIMG)
                             # rightIMG = self.rotate_img(rightIMG,0) #right image rotate 90 deg CW
                             framecount = 0
                             left_fp = PROCESSED_ORBI_ROOT+str(file_idx)+"1"+".jpg"
                             right_fp = PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg"
                             # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"0"+".jpg",leftIMG)
                             cv2.imwrite(left_fp,leftEyeIMG)
-                            # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
+                            # # cv2.imwrite(PROCESSED_ORBI_ROOT+str(file_idx)+"2"+".jpg",rightIMG)
                             cv2.imwrite(right_fp,rightEyeIMG)
                             
                             cmd = "./image-stitching " +  left_fp + " " + right_fp
@@ -347,5 +348,5 @@ class DATA_PIPELINE():
 
 dp = DATA_PIPELINE()
 # dp.process_all_undistort()
-# dp.process_all_undistort_stitch()
-dp.label_all_img()
+dp.process_all_undistort_stitch()
+# dp.label_all_img()
