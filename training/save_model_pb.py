@@ -1,7 +1,13 @@
-import tensorflow as tf
-from tensorflow.keras import backend as K
-from tensorflow.keras.models import load_model
-from tensorflow.keras.models import model_from_json
+# import tensorflow as tf
+# from tensorflow.keras import backend as K
+# from tensorflow.keras.models import load_model
+# from tensorflow.keras.models import model_from_json
+# import json
+
+from tensorflow.python.framework import graph_io, graph_util
+from keras import backend as K
+from keras.models import load_model
+from keras.models import model_from_json
 import json
 
 """
@@ -19,9 +25,9 @@ with open("./model/RUN_ID.log","r+") as f:
     RUN_ID = str(f.readline())
 
 # refer to train_result.json
-architecture_fp = './model/architecture/CV_aid_mobilenet_cam-31.json'
+architecture_fp = './model/architecture/CV_aid_mobilenet_cam-40.json'
 # weights_fp = './model/weights/'+RUN_ID+"/"+"CV_aid_mobilenet_cam-1-01-0.08.hdf5"
-weights_fp = './model/weights/31/CV_aid_mobilenet_cam-31-16-0.21.hdf5'
+weights_fp = './model/weights/40/CV_aid_mobilenet_cam-40-08-0.39.hdf5'
 save_fp = './model/saved_pb/'+RUN_ID+".pb"
 model_type = 'V1'  # V1, V2
 
@@ -59,9 +65,9 @@ def convert_to_pb():
     model.summary()
     
     # print(model_filepath.split("/"))
-    minimal_graph = tf.graph_util.convert_variables_to_constants(session, session.graph.as_graph_def(), [final_layer])
+    minimal_graph = graph_util.convert_variables_to_constants(session, session.graph.as_graph_def(), [final_layer])
     print("Saving to: " + save_fp)
-    tf.io.write_graph(minimal_graph, '.', save_fp, as_text=False)
+    graph_io.write_graph(minimal_graph, '.', save_fp, as_text=False)
     print("conversion success")
 
 convert_to_pb()

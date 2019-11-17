@@ -1,14 +1,22 @@
-import tensorflow.keras
-from tensorflow.keras import Model
-from tensorflow.keras.layers import Convolution2D, Activation, GlobalAveragePooling2D, Reshape, Dropout, Dense, ReLU
+# import tensorflow.keras
+# from tensorflow.keras import Model
+# from tensorflow.keras.layers import Convolution2D, Activation, GlobalAveragePooling2D, Reshape, Dropout, Dense, ReLU
+# import numpy as np
+# import tensorflow as tf
+# # import tensorflow.keras.backend as K
+# import keras.backend as K
+
+import keras
+from keras import Model
+from keras.layers import Convolution2D, Activation, GlobalAveragePooling2D, Reshape, Dropout, Dense, ReLU
 import numpy as np
 import tensorflow as tf
-import tensorflow.keras.backend as K
+import keras.backend as K
 
 
 def mobilenetv1_transfer_learning(num_classes):
     ft_layers = [15, 22]
-    mobilenet = tensorflow.keras.applications.mobilenet.MobileNet(include_top=False)
+    mobilenet = keras.applications.mobilenet.MobileNet(include_top=False)
     x = mobilenet.layers[-1].output  # -3
     x = Convolution2D(64, (3, 3), padding='valid', name='conv10')(x)
     x = Activation('relu', name='relu_conv10')(x)
@@ -26,7 +34,8 @@ def mobilenetv1_transfer_learning(num_classes):
 
 def mobilenetv2_transfer_learning(num_classes):
     ft_layers = [2] # , 14, 22]
-    mobilenet = tensorflow.keras.applications.mobilenetv2.MobileNetV2()
+    # mobilenet = tensorflow.keras.applications.mobilenetv2.MobileNetV2()
+    mobilenet = keras.applications.mobilenetv2.MobileNetV2()
     x = mobilenet.layers[-3].output  # -14
 
     x = Convolution2D(64, (3, 3), padding='valid', name='conv10')(x)

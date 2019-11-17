@@ -1,0 +1,2 @@
+model_checkpoint_path: "CV_aid_mobilenet_cam-36-01-0.08.hdf5"
+all_model_checkpoint_paths: "CV_aid_mobilenet_cam-36-01-0.08.hdf5"

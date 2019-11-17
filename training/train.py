@@ -1,11 +1,15 @@
 import tensorflow as tf
-from tensorflow.keras.optimizers import Adam, SGD, RMSprop
+# from tensorflow.keras.optimizers import Adam, SGD, RMSprop
+from keras.optimizers import Adam, SGD, RMSprop
 # from utils import models, prediction_utils, save_model_pb
 from sklearn.metrics import confusion_matrix, accuracy_score, mean_absolute_error
 from utils.load_data import load_data
 
-from tensorflow.keras.callbacks import ModelCheckpoint
-from tensorflow.keras.utils import plot_model
+# from tensorflow.keras.callbacks import ModelCheckpoint
+# from tensorflow.keras.utils import plot_model
+from keras.callbacks import ModelCheckpoint
+from keras.utils import plot_model
+
 from matplotlib import pyplot as plt
 from utils import orbi_model
 import time
@@ -24,9 +28,9 @@ Files = {}
 Results = {}
 Graphs = {}
 
-config = tf.compat.v1.ConfigProto()
+config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
-session = tf.compat.v1.Session(config=config)
+# session = tf.compat.v1.Session(config=config)
 
 # update run id in the file
 with open("./model/RUN_ID.log","r+") as f:
@@ -108,7 +112,7 @@ def main():
         model.compile(
             init_optimizer, 
             loss=loss,
-            metrics=['accuracy']
+            metrics=['acc']
         )
         preprocess = True
     elif model_type == 'V2':
@@ -118,7 +122,7 @@ def main():
         model.compile(
             init_optimizer, 
             loss=loss,
-            metrics=['accuracy']
+            metrics=['acc']
         )
         preprocess = True
     
