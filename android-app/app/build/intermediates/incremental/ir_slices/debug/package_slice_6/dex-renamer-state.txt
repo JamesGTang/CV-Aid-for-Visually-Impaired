@@ -1,4 +1,1 @@
-#Sun Feb 24 15:53:46 EST 2019
-base.0=/Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/app/build/intermediates/transforms/dexMerger/debug/6
-path.0=classes.dex
-renamed.0=classes.dex
+#Sat Nov 16 18:57:07 EST 2019

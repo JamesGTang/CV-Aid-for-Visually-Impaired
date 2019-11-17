@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-mr/values-mr.xml",
+            "outputFile": "/Users/jamestang/Desktop/Code/CV-Aid-for-Visually-Impaired/android-app/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-mr/values-mr.xml",
             "map": [
                 {
-                    "source": "/Users/adeeb27/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/195f4e4554f5dc3d00353cbc66cea813/res/values-mr/values-mr.xml",
+                    "source": "/Users/jamestang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/98c9cde677e870da9c68134371e3b924/res/values-mr/values-mr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

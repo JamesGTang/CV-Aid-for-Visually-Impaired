@@ -1,4 +1,4 @@
-# Install script for directory: /Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/openAL4Android
+# Install script for directory: /Users/jamestang/Desktop/Code/CV-Aid-for-Visually-Impaired/android-app/openAL4Android
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/openAL4Android/.externalNativeBuild/cmake/debug/armeabi-v7a/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/jamestang/Desktop/Code/CV-Aid-for-Visually-Impaired/android-app/openAL4Android/.externalNativeBuild/cmake/debug/armeabi-v7a/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

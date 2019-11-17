@@ -2,18 +2,18 @@
 {
 	"buildFiles" : 
 	[
-		"/Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/openAL4Android/CMakeLists.txt"
+		"/Users/jamestang/Desktop/Code/CV-Aid-for-Visually-Impaired/android-app/openAL4Android/CMakeLists.txt"
 	],
 	"cleanCommands" : 
 	[
-		"/Users/adeeb27/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/openAL4Android/.externalNativeBuild/cmake/debug/armeabi-v7a --target clean"
+		"/Users/jamestang/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/jamestang/Desktop/Code/CV-Aid-for-Visually-Impaired/android-app/openAL4Android/.externalNativeBuild/cmake/debug/armeabi-v7a --target clean"
 	],
 	"toolchains" : 
 	{
-		"13584239242757554376" : 
+		"3047535542559655705" : 
 		{
-			"cCompilerExecutable" : "/Users/adeeb27/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
-			"cppCompilerExecutable" : "/Users/adeeb27/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+			"cCompilerExecutable" : "/Users/jamestang/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/Users/jamestang/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
 		}
 	}
 }
