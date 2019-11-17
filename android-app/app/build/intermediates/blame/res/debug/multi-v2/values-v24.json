@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/adeeb27/Documents/University_Stuff/WINTER2019/ECSE456/AlreadyDone/WSApplication/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "outputFile": "/Users/jamestang/Desktop/Code/CV-Aid-for-Visually-Impaired/android-app/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/adeeb27/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/3e4e866eaecb0087707964cf3c80311a/res/values-v24/values-v24.xml",
+                    "source": "/Users/jamestang/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/f8d8a5d575b37c5195a37cec6319b2a8/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/adeeb27/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/195f4e4554f5dc3d00353cbc66cea813/res/values-v24/values-v24.xml",
+                    "source": "/Users/jamestang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/98c9cde677e870da9c68134371e3b924/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

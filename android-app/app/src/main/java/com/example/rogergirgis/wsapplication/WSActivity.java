@@ -74,8 +74,8 @@ public class WSActivity extends CameraActivity implements OnImageAvailableListen
     private static int IMAGE_MEAN;
     private static float IMAGE_STD;
 
-    private static final String OUTPUT_NAME_UNK = "loss/Softmax";
-    private static final String MODEL_FILE_UNK = "file:///android_asset/Mobilenet_8.pb";
+    private static final String OUTPUT_NAME_UNK = "RELU_FINAL/Relu6";
+    private static final String MODEL_FILE_UNK = "file:///android_asset/40.pb";
     private static final int IMAGE_MEAN_UNK = 1;
     private static final float IMAGE_STD_UNK = 0;
     private static final String LABEL_FILE_UNK = "file:///android_asset/classes.8.txt";
@@ -173,13 +173,13 @@ public class WSActivity extends CameraActivity implements OnImageAvailableListen
         loadConfiguration();
 
         if (MODEL_TYPE == 0){
-            OUTPUT_NAME = "loss/Softmax";
-            MODEL_FILE = "file:///android_asset/Mobilenet_8.pb";
+            OUTPUT_NAME = OUTPUT_NAME_UNK;
+            MODEL_FILE = MODEL_FILE_UNK;
             IMAGE_MEAN = 1;
             IMAGE_STD = 0;
         } else if(MODEL_TYPE == 1){
-            OUTPUT_NAME = "re_lu_1/Relu";
-            MODEL_FILE = "file:///android_asset/mobilenetV1.pb";
+            OUTPUT_NAME = OUTPUT_NAME_UNK;
+            MODEL_FILE = MODEL_FILE_UNK;
             IMAGE_MEAN = 128;
             IMAGE_STD = 1;
         }
