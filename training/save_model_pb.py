@@ -25,9 +25,9 @@ with open("./model/RUN_ID.log","r+") as f:
     RUN_ID = str(f.readline())
 
 # refer to train_result.json
-architecture_fp = './model/architecture/CV_aid_mobilenet_cam-40.json'
+architecture_fp = './model/architecture/CV_aid_mobilenet_cam-41.json'
 # weights_fp = './model/weights/'+RUN_ID+"/"+"CV_aid_mobilenet_cam-1-01-0.08.hdf5"
-weights_fp = './model/weights/40/CV_aid_mobilenet_cam-40-08-0.39.hdf5'
+weights_fp = './model/weights/41/CV_aid_mobilenet_cam-41-33-0.56.hdf5'
 save_fp = './model/saved_pb/'+RUN_ID+".pb"
 model_type = 'V1'  # V1, V2
 
